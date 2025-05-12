@@ -13,10 +13,15 @@
 
 
 import ApiClient from './ApiClient';
+import AthleteProfileRequest from './models/AthleteProfileRequest';
+import AthleteProfileResponse from './models/AthleteProfileResponse';
 import AthleteRegisterRequest from './models/AthleteRegisterRequest';
+import AthleteTeamResponse from './models/AthleteTeamResponse';
 import AuthChangePasswordPostRequest from './models/AuthChangePasswordPostRequest';
 import BiometricInput from './models/BiometricInput';
 import ErrorResponse from './models/ErrorResponse';
+import InviteAllResponse from './models/InviteAllResponse';
+import InviteCancelRequest from './models/InviteCancelRequest';
 import InviteCreateRequest from './models/InviteCreateRequest';
 import InviteCreateResponse from './models/InviteCreateResponse';
 import InviteDetailsRequest from './models/InviteDetailsRequest';
@@ -74,10 +79,28 @@ export {
     ApiClient,
 
     /**
+     * The AthleteProfileRequest model constructor.
+     * @property {module:models/AthleteProfileRequest}
+     */
+    AthleteProfileRequest,
+
+    /**
+     * The AthleteProfileResponse model constructor.
+     * @property {module:models/AthleteProfileResponse}
+     */
+    AthleteProfileResponse,
+
+    /**
      * The AthleteRegisterRequest model constructor.
      * @property {module:models/AthleteRegisterRequest}
      */
     AthleteRegisterRequest,
+
+    /**
+     * The AthleteTeamResponse model constructor.
+     * @property {module:models/AthleteTeamResponse}
+     */
+    AthleteTeamResponse,
 
     /**
      * The AuthChangePasswordPostRequest model constructor.
@@ -96,6 +119,18 @@ export {
      * @property {module:models/ErrorResponse}
      */
     ErrorResponse,
+
+    /**
+     * The InviteAllResponse model constructor.
+     * @property {module:models/InviteAllResponse}
+     */
+    InviteAllResponse,
+
+    /**
+     * The InviteCancelRequest model constructor.
+     * @property {module:models/InviteCancelRequest}
+     */
+    InviteCancelRequest,
 
     /**
      * The InviteCreateRequest model constructor.

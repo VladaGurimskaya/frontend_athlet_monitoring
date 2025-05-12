@@ -47,6 +47,9 @@ class InviteDetailsResponse {
         if (data) {
             obj = obj || new InviteDetailsResponse();
 
+            if (data.hasOwnProperty('invite_id')) {
+                obj['invite_id'] = ApiClient.convertToType(data['invite_id'], 'Number');
+            }
             if (data.hasOwnProperty('invite_code')) {
                 obj['invite_code'] = ApiClient.convertToType(data['invite_code'], 'String');
             }
@@ -61,6 +64,9 @@ class InviteDetailsResponse {
             }
             if (data.hasOwnProperty('organization_id')) {
                 obj['organization_id'] = ApiClient.convertToType(data['organization_id'], 'Number');
+            }
+            if (data.hasOwnProperty('is_used')) {
+                obj['is_used'] = ApiClient.convertToType(data['is_used'], 'Boolean');
             }
         }
         return obj;
@@ -98,6 +104,11 @@ class InviteDetailsResponse {
 
 
 /**
+ * @member {Number} invite_id
+ */
+InviteDetailsResponse.prototype['invite_id'] = undefined;
+
+/**
  * @member {String} invite_code
  */
 InviteDetailsResponse.prototype['invite_code'] = undefined;
@@ -121,6 +132,11 @@ InviteDetailsResponse.prototype['license_number'] = undefined;
  * @member {Number} organization_id
  */
 InviteDetailsResponse.prototype['organization_id'] = undefined;
+
+/**
+ * @member {Boolean} is_used
+ */
+InviteDetailsResponse.prototype['is_used'] = undefined;
 
 
 

@@ -29,7 +29,18 @@
                   'inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium'
                 ]"
               >
-                Пригласить пользователя
+                Управление приглашениями
+              </a>
+              <a 
+                v-if="authStore.isAdmin" 
+                href="#" 
+                @click.prevent="activeTab = 'organizations'"
+                :class="[
+                  activeTab === 'organizations' ? 'border-primary-500 text-gray-900' : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700', 
+                  'inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium'
+                ]"
+              >
+                Управление организациями
               </a>
               <!-- Вкладки для тренера -->
               <a 
@@ -85,12 +96,27 @@
                 Медицинские записи
               </a>
               <!-- Вкладки для спортсмена -->
-              <a 
-                v-if="authStore.isAthlete" 
-                href="#" 
-                class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
+              <a
+                v-if="authStore.isAthlete"
+                href="#"
+                @click.prevent="activeTab = 'biometrics'"
+                :class="[
+                  activeTab === 'biometrics' ? 'border-primary-500 text-gray-900' : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700', 
+                  'inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium'
+                ]"
               >
-                Мой профиль
+                Биометрические данные
+              </a>
+              <a
+                v-if="authStore.isAthlete"
+                href="#"
+                @click.prevent="activeTab = 'profile'"
+                :class="[
+                  activeTab === 'profile' ? 'border-primary-500 text-gray-900' : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700', 
+                  'inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium'
+                ]"
+              >
+                Профиль
               </a>
             </div>
           </div>
@@ -123,6 +149,9 @@
           <div v-if="activeTab === 'invite' && authStore.isAdmin" class="px-4 py-5 sm:px-0">
             <InviteUserForm />
           </div>
+          <div v-else-if="activeTab === 'organizations' && authStore.isAdmin" class="px-4 py-5 sm:px-0">
+            <OrganizationList />
+          </div>
           <!-- Вкладки тренера -->
           <div v-else-if="activeTab === 'teams' && authStore.isCoach" class="px-4 py-5 sm:px-0">
             <CoachTeams />
@@ -136,6 +165,13 @@
           <div v-else-if="activeTab === 'requests' && authStore.isCoach" class="px-4 py-5 sm:px-0">
             <CoachRequests />
           </div>
+          <!-- Вкладки для спортсмена -->
+          <div v-else-if="activeTab === 'biometrics' && authStore.isAthlete" class="px-4 py-5 sm:px-0">
+            <AthleteBiometrics />
+          </div>
+          <div v-else-if="activeTab === 'profile' && authStore.isAthlete" class="px-4 py-5 sm:px-0">
+            <AthleteProfile />
+          </div>
           <div v-else class="px-4 py-8 sm:px-0">
             <div class="border-4 border-dashed border-gray-200 rounded-lg h-96 flex items-center justify-center">
               <p class="text-gray-500">Здесь будет {{ contentPlaceholder }}</p>
@@ -148,7 +184,7 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { useAuthStore } from '../stores/auth'
 import InviteUserForm from '../components/admin/InviteUserForm.vue'
@@ -156,6 +192,9 @@ import CoachTeams from '../components/coach/CoachTeams.vue'
 import CoachAthletes from '../components/coach/CoachAthletes.vue'
 import CoachTrainingPlans from '../components/coach/CoachTrainingPlans.vue'
 import CoachRequests from '../components/coach/CoachRequests.vue'
+import AthleteBiometrics from '../components/athlete/AthleteBiometrics.vue'
+import AthleteProfile from '../components/athlete/AthleteProfile.vue'
+import OrganizationList from '../components/admin/OrganizationList.vue'
 
 const router = useRouter()
 const authStore = useAuthStore()
@@ -173,7 +212,9 @@ const userRoleText = computed(() => {
 
 const pageTitle = computed(() => {
   if (activeTab.value === 'invite') {
-    return 'Приглашение пользователей'
+    return 'Управление приглашениями'
+  } else if (activeTab.value === 'organizations') {
+    return 'Управление организациями'
   } else if (activeTab.value === 'teams') {
     return 'Управление командами'
   } else if (activeTab.value === 'athletes') {
@@ -182,6 +223,10 @@ const pageTitle = computed(() => {
     return 'Планы тренировок'
   } else if (activeTab.value === 'requests') {
     return 'Заявки спортсменов'
+  } else if (activeTab.value === 'biometrics') {
+    return 'Биометрические данные'
+  } else if (activeTab.value === 'profile') {
+    return 'Профиль спортсмена'
   }
   return 'Панель управления'
 })

@@ -13,9 +13,14 @@
 
 
 import ApiClient from "../ApiClient";
+import AthleteProfileRequest from '../models/AthleteProfileRequest';
+import AthleteProfileResponse from '../models/AthleteProfileResponse';
 import AthleteRegisterRequest from '../models/AthleteRegisterRequest';
+import AthleteTeamResponse from '../models/AthleteTeamResponse';
 import AuthChangePasswordPostRequest from '../models/AuthChangePasswordPostRequest';
 import ErrorResponse from '../models/ErrorResponse';
+import InviteAllResponse from '../models/InviteAllResponse';
+import InviteCancelRequest from '../models/InviteCancelRequest';
 import InviteCreateRequest from '../models/InviteCreateRequest';
 import InviteCreateResponse from '../models/InviteCreateResponse';
 import InviteDetailsRequest from '../models/InviteDetailsRequest';
@@ -42,6 +47,128 @@ export default class AuthApi {
         this.apiClient = apiClient || ApiClient.instance;
     }
 
+
+    /**
+     * Callback function to receive the result of the authAthleteProfilePost operation.
+     * @callback module:api/AuthApi~authAthleteProfilePostCallback
+     * @param {String} error Error message, if any.
+     * @param {module:models/AthleteProfileResponse} data The data returned by the service call.
+     * @param {String} response The complete HTTP response.
+     */
+
+    /**
+     * Профиль спортсмена
+     * @param {module:models/AthleteProfileRequest} athleteProfileRequest 
+     * @param {module:api/AuthApi~authAthleteProfilePostCallback} callback The callback function, accepting three arguments: error, data, response
+     * data is of type: {@link module:models/AthleteProfileResponse}
+     */
+    authAthleteProfilePost(athleteProfileRequest, callback) {
+      let postBody = athleteProfileRequest;
+      // verify the required parameter 'athleteProfileRequest' is set
+      if (athleteProfileRequest === undefined || athleteProfileRequest === null) {
+        throw new Error("Missing the required parameter 'athleteProfileRequest' when calling authAthleteProfilePost");
+      }
+
+      let pathParams = {
+      };
+      let queryParams = {
+      };
+      let headerParams = {
+      };
+      let formParams = {
+      };
+
+      let authNames = ['bearerAuth'];
+      let contentTypes = ['application/json'];
+      let accepts = ['application/json'];
+      let returnType = AthleteProfileResponse;
+      return this.apiClient.callApi(
+        '/auth/athlete-profile', 'POST',
+        pathParams, queryParams, headerParams, formParams, postBody,
+        authNames, contentTypes, accepts, returnType, null, callback
+      );
+    }
+
+    /**
+     * Callback function to receive the result of the authAthleteTeamPost operation.
+     * @callback module:api/AuthApi~authAthleteTeamPostCallback
+     * @param {String} error Error message, if any.
+     * @param {module:models/AthleteTeamResponse} data The data returned by the service call.
+     * @param {String} response The complete HTTP response.
+     */
+
+    /**
+     * Команда спортсмена
+     * @param {module:models/AthleteProfileRequest} athleteProfileRequest 
+     * @param {module:api/AuthApi~authAthleteTeamPostCallback} callback The callback function, accepting three arguments: error, data, response
+     * data is of type: {@link module:models/AthleteTeamResponse}
+     */
+    authAthleteTeamPost(athleteProfileRequest, callback) {
+      let postBody = athleteProfileRequest;
+      // verify the required parameter 'athleteProfileRequest' is set
+      if (athleteProfileRequest === undefined || athleteProfileRequest === null) {
+        throw new Error("Missing the required parameter 'athleteProfileRequest' when calling authAthleteTeamPost");
+      }
+
+      let pathParams = {
+      };
+      let queryParams = {
+      };
+      let headerParams = {
+      };
+      let formParams = {
+      };
+
+      let authNames = ['bearerAuth'];
+      let contentTypes = ['application/json'];
+      let accepts = ['application/json'];
+      let returnType = AthleteTeamResponse;
+      return this.apiClient.callApi(
+        '/auth/athlete-team', 'POST',
+        pathParams, queryParams, headerParams, formParams, postBody,
+        authNames, contentTypes, accepts, returnType, null, callback
+      );
+    }
+
+    /**
+     * Callback function to receive the result of the authCancelInvitePost operation.
+     * @callback module:api/AuthApi~authCancelInvitePostCallback
+     * @param {String} error Error message, if any.
+     * @param data This operation does not return a value.
+     * @param {String} response The complete HTTP response.
+     */
+
+    /**
+     * Отмена инвайта
+     * @param {module:models/InviteCancelRequest} inviteCancelRequest 
+     * @param {module:api/AuthApi~authCancelInvitePostCallback} callback The callback function, accepting three arguments: error, data, response
+     */
+    authCancelInvitePost(inviteCancelRequest, callback) {
+      let postBody = inviteCancelRequest;
+      // verify the required parameter 'inviteCancelRequest' is set
+      if (inviteCancelRequest === undefined || inviteCancelRequest === null) {
+        throw new Error("Missing the required parameter 'inviteCancelRequest' when calling authCancelInvitePost");
+      }
+
+      let pathParams = {
+      };
+      let queryParams = {
+      };
+      let headerParams = {
+      };
+      let formParams = {
+      };
+
+      let authNames = ['bearerAuth'];
+      let contentTypes = ['application/json'];
+      let accepts = ['application/json'];
+      let returnType = null;
+      return this.apiClient.callApi(
+        '/auth/cancel-invite', 'POST',
+        pathParams, queryParams, headerParams, formParams, postBody,
+        authNames, contentTypes, accepts, returnType, null, callback
+      );
+    }
 
     /**
      * Callback function to receive the result of the authChangePasswordPost operation.
@@ -119,6 +246,42 @@ export default class AuthApi {
       let returnType = InviteCreateResponse;
       return this.apiClient.callApi(
         '/auth/create-invite-code', 'POST',
+        pathParams, queryParams, headerParams, formParams, postBody,
+        authNames, contentTypes, accepts, returnType, null, callback
+      );
+    }
+
+    /**
+     * Callback function to receive the result of the authGetAllInvitesGet operation.
+     * @callback module:api/AuthApi~authGetAllInvitesGetCallback
+     * @param {String} error Error message, if any.
+     * @param {module:models/InviteAllResponse} data The data returned by the service call.
+     * @param {String} response The complete HTTP response.
+     */
+
+    /**
+     * Все инвайты
+     * @param {module:api/AuthApi~authGetAllInvitesGetCallback} callback The callback function, accepting three arguments: error, data, response
+     * data is of type: {@link module:models/InviteAllResponse}
+     */
+    authGetAllInvitesGet(callback) {
+      let postBody = null;
+
+      let pathParams = {
+      };
+      let queryParams = {
+      };
+      let headerParams = {
+      };
+      let formParams = {
+      };
+
+      let authNames = ['bearerAuth'];
+      let contentTypes = [];
+      let accepts = ['application/json'];
+      let returnType = InviteAllResponse;
+      return this.apiClient.callApi(
+        '/auth/get-all-invites', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
         authNames, contentTypes, accepts, returnType, null, callback
       );

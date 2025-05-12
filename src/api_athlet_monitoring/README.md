@@ -108,15 +108,15 @@ var bearerAuth = defaultClient.authentications['bearerAuth'];
 bearerAuth.accessToken = "YOUR ACCESS TOKEN"
 
 var api = new Api.AuthApi()
-var authChangePasswordPostRequest = {"old_password":"oldPass123","new_password":"newSecurePass456"}; // {AuthChangePasswordPostRequest} 
+var athleteProfileRequest = new Api.AthleteProfileRequest(); // {AthleteProfileRequest} 
 var callback = function(error, data, response) {
   if (error) {
     console.error(error);
   } else {
-    console.log('API called successfully.');
+    console.log('API called successfully. Returned data: ' + data);
   }
 };
-api.authChangePasswordPost(authChangePasswordPostRequest, callback);
+api.authAthleteProfilePost(athleteProfileRequest, callback);
 
 ```
 
@@ -126,8 +126,12 @@ All URIs are relative to *http://localhost:8000/api/v1*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
+*Api.AuthApi* | [**authAthleteProfilePost**](docs/AuthApi.md#authAthleteProfilePost) | **POST** /auth/athlete-profile | Профиль спортсмена
+*Api.AuthApi* | [**authAthleteTeamPost**](docs/AuthApi.md#authAthleteTeamPost) | **POST** /auth/athlete-team | Команда спортсмена
+*Api.AuthApi* | [**authCancelInvitePost**](docs/AuthApi.md#authCancelInvitePost) | **POST** /auth/cancel-invite | Отмена инвайта
 *Api.AuthApi* | [**authChangePasswordPost**](docs/AuthApi.md#authChangePasswordPost) | **POST** /auth/change-password | Смена пароля пользователя
 *Api.AuthApi* | [**authCreateInviteCodePost**](docs/AuthApi.md#authCreateInviteCodePost) | **POST** /auth/create-invite-code | Создание инвайта для врача или тренера
+*Api.AuthApi* | [**authGetAllInvitesGet**](docs/AuthApi.md#authGetAllInvitesGet) | **GET** /auth/get-all-invites | Все инвайты
 *Api.AuthApi* | [**authGetInviteDetailsPost**](docs/AuthApi.md#authGetInviteDetailsPost) | **POST** /auth/get-invite-details | Информация о приглашении
 *Api.AuthApi* | [**authLoginPost**](docs/AuthApi.md#authLoginPost) | **POST** /auth/login | Авторизация
 *Api.AuthApi* | [**authRegisterAthletePost**](docs/AuthApi.md#authRegisterAthletePost) | **POST** /auth/register/athlete | Регистрация спортсмена
@@ -145,10 +149,15 @@ Class | Method | HTTP request | Description
 
 ## Documentation for Models
 
+ - [Api.AthleteProfileRequest](docs/AthleteProfileRequest.md)
+ - [Api.AthleteProfileResponse](docs/AthleteProfileResponse.md)
  - [Api.AthleteRegisterRequest](docs/AthleteRegisterRequest.md)
+ - [Api.AthleteTeamResponse](docs/AthleteTeamResponse.md)
  - [Api.AuthChangePasswordPostRequest](docs/AuthChangePasswordPostRequest.md)
  - [Api.BiometricInput](docs/BiometricInput.md)
  - [Api.ErrorResponse](docs/ErrorResponse.md)
+ - [Api.InviteAllResponse](docs/InviteAllResponse.md)
+ - [Api.InviteCancelRequest](docs/InviteCancelRequest.md)
  - [Api.InviteCreateRequest](docs/InviteCreateRequest.md)
  - [Api.InviteCreateResponse](docs/InviteCreateResponse.md)
  - [Api.InviteDetailsRequest](docs/InviteDetailsRequest.md)

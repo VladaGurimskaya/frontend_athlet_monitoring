@@ -25,13 +25,15 @@ class InviteRegisterRequest {
      * @param inviteCode {String} 
      * @param email {String} 
      * @param password {String} 
+     * @param role {module:models/InviteRegisterRequest.RoleEnum} 
      * @param firstName {String} 
      * @param lastName {String} 
      * @param middleName {String} 
+     * @param licenseNumber {String} 
      */
-    constructor(inviteCode, email, password, firstName, lastName, middleName) { 
+    constructor(inviteCode, email, password, role, firstName, lastName, middleName, licenseNumber) { 
         
-        InviteRegisterRequest.initialize(this, inviteCode, email, password, firstName, lastName, middleName);
+        InviteRegisterRequest.initialize(this, inviteCode, email, password, role, firstName, lastName, middleName, licenseNumber);
     }
 
     /**
@@ -39,13 +41,15 @@ class InviteRegisterRequest {
      * This method is used by the constructors of any subclasses, in order to implement multiple inheritance (mix-ins).
      * Only for internal use.
      */
-    static initialize(obj, inviteCode, email, password, firstName, lastName, middleName) { 
+    static initialize(obj, inviteCode, email, password, role, firstName, lastName, middleName, licenseNumber) { 
         obj['invite_code'] = inviteCode;
         obj['email'] = email;
         obj['password'] = password;
+        obj['role'] = role;
         obj['first_name'] = firstName;
         obj['last_name'] = lastName;
         obj['middle_name'] = middleName;
+        obj['license_number'] = licenseNumber;
     }
 
     /**
@@ -65,8 +69,14 @@ class InviteRegisterRequest {
             if (data.hasOwnProperty('email')) {
                 obj['email'] = ApiClient.convertToType(data['email'], 'String');
             }
+            if (data.hasOwnProperty('phone')) {
+                obj['phone'] = ApiClient.convertToType(data['phone'], 'String');
+            }
             if (data.hasOwnProperty('password')) {
                 obj['password'] = ApiClient.convertToType(data['password'], 'String');
+            }
+            if (data.hasOwnProperty('role')) {
+                obj['role'] = ApiClient.convertToType(data['role'], 'String');
             }
             if (data.hasOwnProperty('first_name')) {
                 obj['first_name'] = ApiClient.convertToType(data['first_name'], 'String');
@@ -76,6 +86,21 @@ class InviteRegisterRequest {
             }
             if (data.hasOwnProperty('middle_name')) {
                 obj['middle_name'] = ApiClient.convertToType(data['middle_name'], 'String');
+            }
+            if (data.hasOwnProperty('license_number')) {
+                obj['license_number'] = ApiClient.convertToType(data['license_number'], 'String');
+            }
+            if (data.hasOwnProperty('organization_id')) {
+                obj['organization_id'] = ApiClient.convertToType(data['organization_id'], 'Number');
+            }
+            if (data.hasOwnProperty('sport_type_id')) {
+                obj['sport_type_id'] = ApiClient.convertToType(data['sport_type_id'], 'Number');
+            }
+            if (data.hasOwnProperty('specialization')) {
+                obj['specialization'] = ApiClient.convertToType(data['specialization'], 'String');
+            }
+            if (data.hasOwnProperty('experience_level')) {
+                obj['experience_level'] = ApiClient.convertToType(data['experience_level'], 'String');
             }
         }
         return obj;
@@ -102,8 +127,16 @@ class InviteRegisterRequest {
             throw new Error("Expected the field `email` to be a primitive type in the JSON string but got " + data['email']);
         }
         // ensure the json data is a string
+        if (data['phone'] && !(typeof data['phone'] === 'string' || data['phone'] instanceof String)) {
+            throw new Error("Expected the field `phone` to be a primitive type in the JSON string but got " + data['phone']);
+        }
+        // ensure the json data is a string
         if (data['password'] && !(typeof data['password'] === 'string' || data['password'] instanceof String)) {
             throw new Error("Expected the field `password` to be a primitive type in the JSON string but got " + data['password']);
+        }
+        // ensure the json data is a string
+        if (data['role'] && !(typeof data['role'] === 'string' || data['role'] instanceof String)) {
+            throw new Error("Expected the field `role` to be a primitive type in the JSON string but got " + data['role']);
         }
         // ensure the json data is a string
         if (data['first_name'] && !(typeof data['first_name'] === 'string' || data['first_name'] instanceof String)) {
@@ -117,6 +150,18 @@ class InviteRegisterRequest {
         if (data['middle_name'] && !(typeof data['middle_name'] === 'string' || data['middle_name'] instanceof String)) {
             throw new Error("Expected the field `middle_name` to be a primitive type in the JSON string but got " + data['middle_name']);
         }
+        // ensure the json data is a string
+        if (data['license_number'] && !(typeof data['license_number'] === 'string' || data['license_number'] instanceof String)) {
+            throw new Error("Expected the field `license_number` to be a primitive type in the JSON string but got " + data['license_number']);
+        }
+        // ensure the json data is a string
+        if (data['specialization'] && !(typeof data['specialization'] === 'string' || data['specialization'] instanceof String)) {
+            throw new Error("Expected the field `specialization` to be a primitive type in the JSON string but got " + data['specialization']);
+        }
+        // ensure the json data is a string
+        if (data['experience_level'] && !(typeof data['experience_level'] === 'string' || data['experience_level'] instanceof String)) {
+            throw new Error("Expected the field `experience_level` to be a primitive type in the JSON string but got " + data['experience_level']);
+        }
 
         return true;
     }
@@ -124,7 +169,7 @@ class InviteRegisterRequest {
 
 }
 
-InviteRegisterRequest.RequiredProperties = ["invite_code", "email", "password", "first_name", "last_name", "middle_name"];
+InviteRegisterRequest.RequiredProperties = ["invite_code", "email", "password", "role", "first_name", "last_name", "middle_name", "license_number"];
 
 /**
  * @member {String} invite_code
@@ -137,9 +182,19 @@ InviteRegisterRequest.prototype['invite_code'] = undefined;
 InviteRegisterRequest.prototype['email'] = undefined;
 
 /**
+ * @member {String} phone
+ */
+InviteRegisterRequest.prototype['phone'] = undefined;
+
+/**
  * @member {String} password
  */
 InviteRegisterRequest.prototype['password'] = undefined;
+
+/**
+ * @member {module:models/InviteRegisterRequest.RoleEnum} role
+ */
+InviteRegisterRequest.prototype['role'] = undefined;
 
 /**
  * @member {String} first_name
@@ -156,8 +211,54 @@ InviteRegisterRequest.prototype['last_name'] = undefined;
  */
 InviteRegisterRequest.prototype['middle_name'] = undefined;
 
+/**
+ * @member {String} license_number
+ */
+InviteRegisterRequest.prototype['license_number'] = undefined;
+
+/**
+ * @member {Number} organization_id
+ */
+InviteRegisterRequest.prototype['organization_id'] = undefined;
+
+/**
+ * @member {Number} sport_type_id
+ */
+InviteRegisterRequest.prototype['sport_type_id'] = undefined;
+
+/**
+ * @member {String} specialization
+ */
+InviteRegisterRequest.prototype['specialization'] = undefined;
+
+/**
+ * @member {String} experience_level
+ */
+InviteRegisterRequest.prototype['experience_level'] = undefined;
 
 
+
+
+
+/**
+ * Allowed values for the <code>role</code> property.
+ * @enum {String}
+ * @readonly
+ */
+InviteRegisterRequest['RoleEnum'] = {
+
+    /**
+     * value: "coach"
+     * @const
+     */
+    "coach": "coach",
+
+    /**
+     * value: "medical"
+     * @const
+     */
+    "medical": "medical"
+};
 
 
 
