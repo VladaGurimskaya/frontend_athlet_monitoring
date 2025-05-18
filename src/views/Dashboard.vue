@@ -96,9 +96,9 @@
                 Медицинские записи
               </a>
               <!-- Вкладки для спортсмена -->
-              <a
-                v-if="authStore.isAthlete"
-                href="#"
+              <a 
+                v-if="authStore.isAthlete" 
+                href="#" 
                 @click.prevent="activeTab = 'biometrics'"
                 :class="[
                   activeTab === 'biometrics' ? 'border-primary-500 text-gray-900' : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700', 

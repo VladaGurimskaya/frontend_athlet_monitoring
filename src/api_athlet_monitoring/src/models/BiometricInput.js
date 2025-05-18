@@ -22,12 +22,15 @@ class BiometricInput {
     /**
      * Constructs a new <code>BiometricInput</code>.
      * @alias module:models/BiometricInput
-     * @param date {Date} 
-     * @param timeOfDay {module:models/BiometricInput.TimeOfDayEnum} 
+     * @param date {String} 
+     * @param morningPulse {Number} 
+     * @param eveningPulse {Number} 
+     * @param HRV {Number} 
+     * @param weight {Number} 
      */
-    constructor(date, timeOfDay) { 
+    constructor(date, morningPulse, eveningPulse, HRV, weight) { 
         
-        BiometricInput.initialize(this, date, timeOfDay);
+        BiometricInput.initialize(this, date, morningPulse, eveningPulse, HRV, weight);
     }
 
     /**
@@ -35,9 +38,12 @@ class BiometricInput {
      * This method is used by the constructors of any subclasses, in order to implement multiple inheritance (mix-ins).
      * Only for internal use.
      */
-    static initialize(obj, date, timeOfDay) { 
+    static initialize(obj, date, morningPulse, eveningPulse, HRV, weight) { 
         obj['date'] = date;
-        obj['time_of_day'] = timeOfDay;
+        obj['morning_pulse'] = morningPulse;
+        obj['evening_pulse'] = eveningPulse;
+        obj['HRV'] = HRV;
+        obj['weight'] = weight;
     }
 
     /**
@@ -52,16 +58,13 @@ class BiometricInput {
             obj = obj || new BiometricInput();
 
             if (data.hasOwnProperty('date')) {
-                obj['date'] = ApiClient.convertToType(data['date'], 'Date');
+                obj['date'] = ApiClient.convertToType(data['date'], 'String');
             }
-            if (data.hasOwnProperty('time_of_day')) {
-                obj['time_of_day'] = ApiClient.convertToType(data['time_of_day'], 'String');
+            if (data.hasOwnProperty('morning_pulse')) {
+                obj['morning_pulse'] = ApiClient.convertToType(data['morning_pulse'], 'Number');
             }
-            if (data.hasOwnProperty('time')) {
-                obj['time'] = ApiClient.convertToType(data['time'], 'String');
-            }
-            if (data.hasOwnProperty('pulse')) {
-                obj['pulse'] = ApiClient.convertToType(data['pulse'], 'Number');
+            if (data.hasOwnProperty('evening_pulse')) {
+                obj['evening_pulse'] = ApiClient.convertToType(data['evening_pulse'], 'Number');
             }
             if (data.hasOwnProperty('HRV')) {
                 obj['HRV'] = ApiClient.convertToType(data['HRV'], 'Number');
@@ -86,12 +89,8 @@ class BiometricInput {
             }
         }
         // ensure the json data is a string
-        if (data['time_of_day'] && !(typeof data['time_of_day'] === 'string' || data['time_of_day'] instanceof String)) {
-            throw new Error("Expected the field `time_of_day` to be a primitive type in the JSON string but got " + data['time_of_day']);
-        }
-        // ensure the json data is a string
-        if (data['time'] && !(typeof data['time'] === 'string' || data['time'] instanceof String)) {
-            throw new Error("Expected the field `time` to be a primitive type in the JSON string but got " + data['time']);
+        if (data['date'] && !(typeof data['date'] === 'string' || data['date'] instanceof String)) {
+            throw new Error("Expected the field `date` to be a primitive type in the JSON string but got " + data['date']);
         }
 
         return true;
@@ -100,27 +99,22 @@ class BiometricInput {
 
 }
 
-BiometricInput.RequiredProperties = ["date", "time_of_day"];
+BiometricInput.RequiredProperties = ["date", "morning_pulse", "evening_pulse", "HRV", "weight"];
 
 /**
- * @member {Date} date
+ * @member {String} date
  */
 BiometricInput.prototype['date'] = undefined;
 
 /**
- * @member {module:models/BiometricInput.TimeOfDayEnum} time_of_day
+ * @member {Number} morning_pulse
  */
-BiometricInput.prototype['time_of_day'] = undefined;
+BiometricInput.prototype['morning_pulse'] = undefined;
 
 /**
- * @member {String} time
+ * @member {Number} evening_pulse
  */
-BiometricInput.prototype['time'] = undefined;
-
-/**
- * @member {Number} pulse
- */
-BiometricInput.prototype['pulse'] = undefined;
+BiometricInput.prototype['evening_pulse'] = undefined;
 
 /**
  * @member {Number} HRV
@@ -134,27 +128,6 @@ BiometricInput.prototype['weight'] = undefined;
 
 
 
-
-
-/**
- * Allowed values for the <code>time_of_day</code> property.
- * @enum {String}
- * @readonly
- */
-BiometricInput['TimeOfDayEnum'] = {
-
-    /**
-     * value: "morning"
-     * @const
-     */
-    "morning": "morning",
-
-    /**
-     * value: "evening"
-     * @const
-     */
-    "evening": "evening"
-};
 
 
 

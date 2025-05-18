@@ -137,6 +137,11 @@ Class | Method | HTTP request | Description
 *Api.AuthApi* | [**authRegisterAthletePost**](docs/AuthApi.md#authRegisterAthletePost) | **POST** /auth/register/athlete | Регистрация спортсмена
 *Api.AuthApi* | [**authRegisterInvitePost**](docs/AuthApi.md#authRegisterInvitePost) | **POST** /auth/register/invite | Регистрация по инвайт-коду (для тренеров и врачей)
 *Api.BiometricsApi* | [**biometricsPost**](docs/BiometricsApi.md#biometricsPost) | **POST** /biometrics | Ввод биометрических данных спортсменом
+*Api.TeamsApi* | [**teamAthleteRemovePost**](docs/TeamsApi.md#teamAthleteRemovePost) | **POST** /team/athlete-remove | Удаление спортсмена из команды
+*Api.TeamsApi* | [**teamsAthletesPost**](docs/TeamsApi.md#teamsAthletesPost) | **POST** /teams/athletes | Список спортсменов в команде
+*Api.TeamsApi* | [**teamsCoachesPost**](docs/TeamsApi.md#teamsCoachesPost) | **POST** /teams/coaches | Список тренеров в команде
+*Api.TeamsApi* | [**teamsCreatePost**](docs/TeamsApi.md#teamsCreatePost) | **POST** /teams/create | Создание команды
+*Api.TeamsApi* | [**teamsGet**](docs/TeamsApi.md#teamsGet) | **GET** /teams | Список команд
 *Api.TeamsApi* | [**teamsJoinPost**](docs/TeamsApi.md#teamsJoinPost) | **POST** /teams/join | Запрос спортсмена на вступление в команду
 *Api.TeamsApi* | [**teamsJoinRequestIdApprovePost**](docs/TeamsApi.md#teamsJoinRequestIdApprovePost) | **POST** /teams/join/{request_id}/approve | Одобрение заявки на вступление в команду
 *Api.TeamsApi* | [**teamsJoinRequestIdRejectPost**](docs/TeamsApi.md#teamsJoinRequestIdRejectPost) | **POST** /teams/join/{request_id}/reject | Отклонение заявки на вступление в команду
@@ -155,6 +160,7 @@ Class | Method | HTTP request | Description
  - [Api.AthleteTeamResponse](docs/AthleteTeamResponse.md)
  - [Api.AuthChangePasswordPostRequest](docs/AuthChangePasswordPostRequest.md)
  - [Api.BiometricInput](docs/BiometricInput.md)
+ - [Api.CoachProfileResponse](docs/CoachProfileResponse.md)
  - [Api.ErrorResponse](docs/ErrorResponse.md)
  - [Api.InviteAllResponse](docs/InviteAllResponse.md)
  - [Api.InviteCancelRequest](docs/InviteCancelRequest.md)
@@ -165,6 +171,12 @@ Class | Method | HTTP request | Description
  - [Api.InviteRegisterRequest](docs/InviteRegisterRequest.md)
  - [Api.LoginRequest](docs/LoginRequest.md)
  - [Api.LoginResponse](docs/LoginResponse.md)
+ - [Api.Team](docs/Team.md)
+ - [Api.TeamCreateRequest](docs/TeamCreateRequest.md)
+ - [Api.TeamGetAthletesResponse](docs/TeamGetAthletesResponse.md)
+ - [Api.TeamGetCoachesResponse](docs/TeamGetCoachesResponse.md)
+ - [Api.TeamRequest](docs/TeamRequest.md)
+ - [Api.TeamResponse](docs/TeamResponse.md)
  - [Api.TeamsJoinPostRequest](docs/TeamsJoinPostRequest.md)
  - [Api.TrainingPlansItemsItemIdOverridePostRequest](docs/TrainingPlansItemsItemIdOverridePostRequest.md)
  - [Api.TrainingPlansPlanIdAssignPostRequest](docs/TrainingPlansPlanIdAssignPostRequest.md)

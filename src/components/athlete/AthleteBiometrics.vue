@@ -157,31 +157,23 @@ const weightFrequency = ref('daily')
 const hrv = ref('')
 const loading = ref(false)
 
-// Настройка API клиента
 const apiClient = new ApiClient()
 apiClient.basePath = 'http://localhost:8000/api/v1'
+apiClient.withCredentials = true
+apiClient.enableCookies = true
+
 const biometricsApi = new BiometricsApi(apiClient)
 
 const submitBiometrics = async () => {
   loading.value = true
   
   try {
-    // Создаем утренние данные
-    const morningData = new BiometricInput(
-      new Date(),
-      'morning'
-    )
-    morningData.pulse = parseInt(morningPulse.value)
-    morningData.HRV = parseInt(hrv.value)
+    const biometricData = new BiometricInput()
+    biometricData.date = new Date().toISOString()
+    biometricData.morning_pulse = parseInt(morningPulse.value)
+    biometricData.evening_pulse = parseInt(eveningPulse.value)
+    biometricData.hrv = parseInt(hrv.value)
     
-    // Создаем вечерние данные
-    const eveningData = new BiometricInput(
-      new Date(),
-      'evening'
-    )
-    eveningData.pulse = parseInt(eveningPulse.value)
-    
-    // Если нужно ввести вес (в зависимости от частоты)
     const shouldInputWeight = (
       weightFrequency.value === 'daily' ||
       (weightFrequency.value === 'every3days' && new Date().getDay() % 3 === 0) ||
@@ -189,25 +181,16 @@ const submitBiometrics = async () => {
     )
     
     if (shouldInputWeight) {
-      morningData.weight = parseFloat(weight.value)
+      biometricData.weight = parseFloat(weight.value)
     }
     
-    // Отправляем данные
     await new Promise((resolve, reject) => {
-      biometricsApi.biometricsPost(morningData, (error, data, response) => {
+      biometricsApi.biometricsPost(biometricData, (error, data, response) => {
         if (error) reject(error)
         else resolve(response)
       })
     })
     
-    await new Promise((resolve, reject) => {
-      biometricsApi.biometricsPost(eveningData, (error, data, response) => {
-        if (error) reject(error)
-        else resolve(response)
-      })
-    })
-    
-    // Очищаем форму
     morningPulse.value = ''
     eveningPulse.value = ''
     weight.value = ''

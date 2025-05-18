@@ -13,7 +13,13 @@
 
 
 import ApiClient from "../ApiClient";
+import AthleteProfileRequest from '../models/AthleteProfileRequest';
 import ErrorResponse from '../models/ErrorResponse';
+import TeamCreateRequest from '../models/TeamCreateRequest';
+import TeamGetAthletesResponse from '../models/TeamGetAthletesResponse';
+import TeamGetCoachesResponse from '../models/TeamGetCoachesResponse';
+import TeamRequest from '../models/TeamRequest';
+import TeamResponse from '../models/TeamResponse';
 import TeamsJoinPostRequest from '../models/TeamsJoinPostRequest';
 
 /**
@@ -34,6 +40,204 @@ export default class TeamsApi {
         this.apiClient = apiClient || ApiClient.instance;
     }
 
+
+    /**
+     * Callback function to receive the result of the teamAthleteRemovePost operation.
+     * @callback module:api/TeamsApi~teamAthleteRemovePostCallback
+     * @param {String} error Error message, if any.
+     * @param data This operation does not return a value.
+     * @param {String} response The complete HTTP response.
+     */
+
+    /**
+     * Удаление спортсмена из команды
+     * @param {module:models/AthleteProfileRequest} athleteProfileRequest 
+     * @param {module:api/TeamsApi~teamAthleteRemovePostCallback} callback The callback function, accepting three arguments: error, data, response
+     */
+    teamAthleteRemovePost(athleteProfileRequest, callback) {
+      let postBody = athleteProfileRequest;
+      // verify the required parameter 'athleteProfileRequest' is set
+      if (athleteProfileRequest === undefined || athleteProfileRequest === null) {
+        throw new Error("Missing the required parameter 'athleteProfileRequest' when calling teamAthleteRemovePost");
+      }
+
+      let pathParams = {
+      };
+      let queryParams = {
+      };
+      let headerParams = {
+      };
+      let formParams = {
+      };
+
+      let authNames = ['bearerAuth'];
+      let contentTypes = ['application/json'];
+      let accepts = ['application/json'];
+      let returnType = null;
+      return this.apiClient.callApi(
+        '/team/athlete-remove', 'POST',
+        pathParams, queryParams, headerParams, formParams, postBody,
+        authNames, contentTypes, accepts, returnType, null, callback
+      );
+    }
+
+    /**
+     * Callback function to receive the result of the teamsAthletesPost operation.
+     * @callback module:api/TeamsApi~teamsAthletesPostCallback
+     * @param {String} error Error message, if any.
+     * @param {module:models/TeamGetAthletesResponse} data The data returned by the service call.
+     * @param {String} response The complete HTTP response.
+     */
+
+    /**
+     * Список спортсменов в команде
+     * @param {module:models/TeamRequest} teamRequest 
+     * @param {module:api/TeamsApi~teamsAthletesPostCallback} callback The callback function, accepting three arguments: error, data, response
+     * data is of type: {@link module:models/TeamGetAthletesResponse}
+     */
+    teamsAthletesPost(teamRequest, callback) {
+      let postBody = teamRequest;
+      // verify the required parameter 'teamRequest' is set
+      if (teamRequest === undefined || teamRequest === null) {
+        throw new Error("Missing the required parameter 'teamRequest' when calling teamsAthletesPost");
+      }
+
+      let pathParams = {
+      };
+      let queryParams = {
+      };
+      let headerParams = {
+      };
+      let formParams = {
+      };
+
+      let authNames = ['bearerAuth'];
+      let contentTypes = ['application/json'];
+      let accepts = ['application/json'];
+      let returnType = TeamGetAthletesResponse;
+      return this.apiClient.callApi(
+        '/teams/athletes', 'POST',
+        pathParams, queryParams, headerParams, formParams, postBody,
+        authNames, contentTypes, accepts, returnType, null, callback
+      );
+    }
+
+    /**
+     * Callback function to receive the result of the teamsCoachesPost operation.
+     * @callback module:api/TeamsApi~teamsCoachesPostCallback
+     * @param {String} error Error message, if any.
+     * @param {module:models/TeamGetCoachesResponse} data The data returned by the service call.
+     * @param {String} response The complete HTTP response.
+     */
+
+    /**
+     * Список тренеров в команде
+     * @param {module:models/TeamRequest} teamRequest 
+     * @param {module:api/TeamsApi~teamsCoachesPostCallback} callback The callback function, accepting three arguments: error, data, response
+     * data is of type: {@link module:models/TeamGetCoachesResponse}
+     */
+    teamsCoachesPost(teamRequest, callback) {
+      let postBody = teamRequest;
+      // verify the required parameter 'teamRequest' is set
+      if (teamRequest === undefined || teamRequest === null) {
+        throw new Error("Missing the required parameter 'teamRequest' when calling teamsCoachesPost");
+      }
+
+      let pathParams = {
+      };
+      let queryParams = {
+      };
+      let headerParams = {
+      };
+      let formParams = {
+      };
+
+      let authNames = ['bearerAuth'];
+      let contentTypes = ['application/json'];
+      let accepts = ['application/json'];
+      let returnType = TeamGetCoachesResponse;
+      return this.apiClient.callApi(
+        '/teams/coaches', 'POST',
+        pathParams, queryParams, headerParams, formParams, postBody,
+        authNames, contentTypes, accepts, returnType, null, callback
+      );
+    }
+
+    /**
+     * Callback function to receive the result of the teamsCreatePost operation.
+     * @callback module:api/TeamsApi~teamsCreatePostCallback
+     * @param {String} error Error message, if any.
+     * @param data This operation does not return a value.
+     * @param {String} response The complete HTTP response.
+     */
+
+    /**
+     * Создание команды
+     * @param {module:models/TeamCreateRequest} teamCreateRequest 
+     * @param {module:api/TeamsApi~teamsCreatePostCallback} callback The callback function, accepting three arguments: error, data, response
+     */
+    teamsCreatePost(teamCreateRequest, callback) {
+      let postBody = teamCreateRequest;
+      // verify the required parameter 'teamCreateRequest' is set
+      if (teamCreateRequest === undefined || teamCreateRequest === null) {
+        throw new Error("Missing the required parameter 'teamCreateRequest' when calling teamsCreatePost");
+      }
+
+      let pathParams = {
+      };
+      let queryParams = {
+      };
+      let headerParams = {
+      };
+      let formParams = {
+      };
+
+      let authNames = ['bearerAuth'];
+      let contentTypes = ['application/json'];
+      let accepts = ['application/json'];
+      let returnType = null;
+      return this.apiClient.callApi(
+        '/teams/create', 'POST',
+        pathParams, queryParams, headerParams, formParams, postBody,
+        authNames, contentTypes, accepts, returnType, null, callback
+      );
+    }
+
+    /**
+     * Callback function to receive the result of the teamsGet operation.
+     * @callback module:api/TeamsApi~teamsGetCallback
+     * @param {String} error Error message, if any.
+     * @param {module:models/TeamResponse} data The data returned by the service call.
+     * @param {String} response The complete HTTP response.
+     */
+
+    /**
+     * Список команд
+     * @param {module:api/TeamsApi~teamsGetCallback} callback The callback function, accepting three arguments: error, data, response
+     * data is of type: {@link module:models/TeamResponse}
+     */
+    teamsGet(callback) {
+      let postBody = null;
+
+      let pathParams = {
+      };
+      let queryParams = {
+      };
+      let headerParams = {
+      };
+      let formParams = {
+      };
+
+      let authNames = ['bearerAuth'];
+      let contentTypes = [];
+      let accepts = ['application/json'];
+      let returnType = TeamResponse;
+      return this.apiClient.callApi(
+        '/teams', 'GET',
+        pathParams, queryParams, headerParams, formParams, postBody,
+        authNames, contentTypes, accepts, returnType, null, callback
+      );
+    }
 
     /**
      * Callback function to receive the result of the teamsJoinPost operation.

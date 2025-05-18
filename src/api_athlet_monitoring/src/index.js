@@ -19,6 +19,7 @@ import AthleteRegisterRequest from './models/AthleteRegisterRequest';
 import AthleteTeamResponse from './models/AthleteTeamResponse';
 import AuthChangePasswordPostRequest from './models/AuthChangePasswordPostRequest';
 import BiometricInput from './models/BiometricInput';
+import CoachProfileResponse from './models/CoachProfileResponse';
 import ErrorResponse from './models/ErrorResponse';
 import InviteAllResponse from './models/InviteAllResponse';
 import InviteCancelRequest from './models/InviteCancelRequest';
@@ -29,6 +30,12 @@ import InviteDetailsResponse from './models/InviteDetailsResponse';
 import InviteRegisterRequest from './models/InviteRegisterRequest';
 import LoginRequest from './models/LoginRequest';
 import LoginResponse from './models/LoginResponse';
+import Team from './models/Team';
+import TeamCreateRequest from './models/TeamCreateRequest';
+import TeamGetAthletesResponse from './models/TeamGetAthletesResponse';
+import TeamGetCoachesResponse from './models/TeamGetCoachesResponse';
+import TeamRequest from './models/TeamRequest';
+import TeamResponse from './models/TeamResponse';
 import TeamsJoinPostRequest from './models/TeamsJoinPostRequest';
 import TrainingPlansItemsItemIdOverridePostRequest from './models/TrainingPlansItemsItemIdOverridePostRequest';
 import TrainingPlansPlanIdAssignPostRequest from './models/TrainingPlansPlanIdAssignPostRequest';
@@ -115,6 +122,12 @@ export {
     BiometricInput,
 
     /**
+     * The CoachProfileResponse model constructor.
+     * @property {module:models/CoachProfileResponse}
+     */
+    CoachProfileResponse,
+
+    /**
      * The ErrorResponse model constructor.
      * @property {module:models/ErrorResponse}
      */
@@ -173,6 +186,42 @@ export {
      * @property {module:models/LoginResponse}
      */
     LoginResponse,
+
+    /**
+     * The Team model constructor.
+     * @property {module:models/Team}
+     */
+    Team,
+
+    /**
+     * The TeamCreateRequest model constructor.
+     * @property {module:models/TeamCreateRequest}
+     */
+    TeamCreateRequest,
+
+    /**
+     * The TeamGetAthletesResponse model constructor.
+     * @property {module:models/TeamGetAthletesResponse}
+     */
+    TeamGetAthletesResponse,
+
+    /**
+     * The TeamGetCoachesResponse model constructor.
+     * @property {module:models/TeamGetCoachesResponse}
+     */
+    TeamGetCoachesResponse,
+
+    /**
+     * The TeamRequest model constructor.
+     * @property {module:models/TeamRequest}
+     */
+    TeamRequest,
+
+    /**
+     * The TeamResponse model constructor.
+     * @property {module:models/TeamResponse}
+     */
+    TeamResponse,
 
     /**
      * The TeamsJoinPostRequest model constructor.

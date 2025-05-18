@@ -10,6 +10,7 @@ docs/AuthApi.md
 docs/AuthChangePasswordPostRequest.md
 docs/BiometricInput.md
 docs/BiometricsApi.md
+docs/CoachProfileResponse.md
 docs/ErrorResponse.md
 docs/InviteAllResponse.md
 docs/InviteCancelRequest.md
@@ -20,6 +21,12 @@ docs/InviteDetailsResponse.md
 docs/InviteRegisterRequest.md
 docs/LoginRequest.md
 docs/LoginResponse.md
+docs/Team.md
+docs/TeamCreateRequest.md
+docs/TeamGetAthletesResponse.md
+docs/TeamGetCoachesResponse.md
+docs/TeamRequest.md
+docs/TeamResponse.md
 docs/TeamsApi.md
 docs/TeamsJoinPostRequest.md
 docs/TrainingApi.md
@@ -42,6 +49,7 @@ src/models/AthleteRegisterRequest.js
 src/models/AthleteTeamResponse.js
 src/models/AuthChangePasswordPostRequest.js
 src/models/BiometricInput.js
+src/models/CoachProfileResponse.js
 src/models/ErrorResponse.js
 src/models/InviteAllResponse.js
 src/models/InviteCancelRequest.js
@@ -52,9 +60,14 @@ src/models/InviteDetailsResponse.js
 src/models/InviteRegisterRequest.js
 src/models/LoginRequest.js
 src/models/LoginResponse.js
+src/models/Team.js
+src/models/TeamCreateRequest.js
+src/models/TeamGetAthletesResponse.js
+src/models/TeamGetCoachesResponse.js
+src/models/TeamRequest.js
+src/models/TeamResponse.js
 src/models/TeamsJoinPostRequest.js
 src/models/TrainingPlansItemsItemIdOverridePostRequest.js
 src/models/TrainingPlansPlanIdAssignPostRequest.js
 src/models/TrainingPlansPlanIdItemsPostRequest.js
 src/models/TrainingPlansPostRequest.js
-test/model/InviteCancelRequest.spec.js

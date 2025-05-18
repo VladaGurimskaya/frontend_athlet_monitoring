@@ -47,6 +47,9 @@ class AthleteProfileResponse {
         if (data) {
             obj = obj || new AthleteProfileResponse();
 
+            if (data.hasOwnProperty('athlete_id')) {
+                obj['athlete_id'] = ApiClient.convertToType(data['athlete_id'], 'Number');
+            }
             if (data.hasOwnProperty('first_name')) {
                 obj['first_name'] = ApiClient.convertToType(data['first_name'], 'String');
             }
@@ -107,6 +110,11 @@ class AthleteProfileResponse {
 }
 
 
+
+/**
+ * @member {Number} athlete_id
+ */
+AthleteProfileResponse.prototype['athlete_id'] = undefined;
 
 /**
  * @member {String} first_name
