@@ -1,10 +1,9 @@
-# Api.AthleteProfileRequest
+# Api.TrainingPlanListResponse
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**athleteId** | **Number** |  | [optional] 
-**teamId** | **Number** |  | [optional] 
+**plans** | [**[TrainingPlan]**](TrainingPlan.md) |  | [optional] 
 
 

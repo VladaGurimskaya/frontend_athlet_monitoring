@@ -14,18 +14,18 @@
 import ApiClient from '../ApiClient';
 
 /**
- * The AthleteProfileRequest model module.
- * @module models/AthleteProfileRequest
+ * The TeamJoinRequest model module.
+ * @module models/TeamJoinRequest
  * @version 1.0.0
  */
-class AthleteProfileRequest {
+class TeamJoinRequest {
     /**
-     * Constructs a new <code>AthleteProfileRequest</code>.
-     * @alias module:models/AthleteProfileRequest
+     * Constructs a new <code>TeamJoinRequest</code>.
+     * @alias module:models/TeamJoinRequest
      */
     constructor() { 
         
-        AthleteProfileRequest.initialize(this);
+        TeamJoinRequest.initialize(this);
     }
 
     /**
@@ -37,19 +37,16 @@ class AthleteProfileRequest {
     }
 
     /**
-     * Constructs a <code>AthleteProfileRequest</code> from a plain JavaScript object, optionally creating a new instance.
+     * Constructs a <code>TeamJoinRequest</code> from a plain JavaScript object, optionally creating a new instance.
      * Copies all relevant properties from <code>data</code> to <code>obj</code> if supplied or a new instance if not.
      * @param {Object} data The plain JavaScript object bearing properties of interest.
-     * @param {module:models/AthleteProfileRequest} obj Optional instance to populate.
-     * @return {module:models/AthleteProfileRequest} The populated <code>AthleteProfileRequest</code> instance.
+     * @param {module:models/TeamJoinRequest} obj Optional instance to populate.
+     * @return {module:models/TeamJoinRequest} The populated <code>TeamJoinRequest</code> instance.
      */
     static constructFromObject(data, obj) {
         if (data) {
-            obj = obj || new AthleteProfileRequest();
+            obj = obj || new TeamJoinRequest();
 
-            if (data.hasOwnProperty('athlete_id')) {
-                obj['athlete_id'] = ApiClient.convertToType(data['athlete_id'], 'Number');
-            }
             if (data.hasOwnProperty('team_id')) {
                 obj['team_id'] = ApiClient.convertToType(data['team_id'], 'Number');
             }
@@ -58,9 +55,9 @@ class AthleteProfileRequest {
     }
 
     /**
-     * Validates the JSON data with respect to <code>AthleteProfileRequest</code>.
+     * Validates the JSON data with respect to <code>TeamJoinRequest</code>.
      * @param {Object} data The plain JavaScript object bearing properties of interest.
-     * @return {boolean} to indicate whether the JSON data is valid with respect to <code>AthleteProfileRequest</code>.
+     * @return {boolean} to indicate whether the JSON data is valid with respect to <code>TeamJoinRequest</code>.
      */
     static validateJSON(data) {
 
@@ -73,19 +70,14 @@ class AthleteProfileRequest {
 
 
 /**
- * @member {Number} athlete_id
- */
-AthleteProfileRequest.prototype['athlete_id'] = undefined;
-
-/**
  * @member {Number} team_id
  */
-AthleteProfileRequest.prototype['team_id'] = undefined;
+TeamJoinRequest.prototype['team_id'] = undefined;
 
 
 
 
 
 
-export default AthleteProfileRequest;
+export default TeamJoinRequest;
 

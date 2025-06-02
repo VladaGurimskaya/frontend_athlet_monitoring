@@ -1,17 +1,16 @@
-# Api.AthleteProfileResponse
+# Api.TeamJoin
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**athleteId** | **Number** |  | [optional] 
+**requestId** | **Number** |  | [optional] 
+**secondName** | **String** |  | [optional] 
 **firstName** | **String** |  | [optional] 
-**lastName** | **String** |  | [optional] 
 **middleName** | **String** |  | [optional] 
 **email** | **String** |  | [optional] 
-**dateOfBirth** | **String** |  | [optional] 
-**phone** | **String** |  | [optional] 
 **teamName** | **String** |  | [optional] 
-**teamSignedDate** | **String** |  | [optional] 
+**requestDate** | **String** |  | [optional] 
+**status** | **String** |  | [optional] 
 
 

@@ -13,10 +13,12 @@
 
 
 import ApiClient from "../ApiClient";
+import ErrorResponse from '../models/ErrorResponse';
+import TrainingPlanCreate from '../models/TrainingPlanCreate';
+import TrainingPlanItemCreate from '../models/TrainingPlanItemCreate';
+import TrainingPlanListResponse from '../models/TrainingPlanListResponse';
 import TrainingPlansItemsItemIdOverridePostRequest from '../models/TrainingPlansItemsItemIdOverridePostRequest';
 import TrainingPlansPlanIdAssignPostRequest from '../models/TrainingPlansPlanIdAssignPostRequest';
-import TrainingPlansPlanIdItemsPostRequest from '../models/TrainingPlansPlanIdItemsPostRequest';
-import TrainingPlansPostRequest from '../models/TrainingPlansPostRequest';
 
 /**
 * Training service.
@@ -36,6 +38,42 @@ export default class TrainingApi {
         this.apiClient = apiClient || ApiClient.instance;
     }
 
+
+    /**
+     * Callback function to receive the result of the getTrainingPlansPost operation.
+     * @callback module:api/TrainingApi~getTrainingPlansPostCallback
+     * @param {String} error Error message, if any.
+     * @param {module:models/TrainingPlanListResponse} data The data returned by the service call.
+     * @param {String} response The complete HTTP response.
+     */
+
+    /**
+     * Список тренировочных планов
+     * @param {module:api/TrainingApi~getTrainingPlansPostCallback} callback The callback function, accepting three arguments: error, data, response
+     * data is of type: {@link module:models/TrainingPlanListResponse}
+     */
+    getTrainingPlansPost(callback) {
+      let postBody = null;
+
+      let pathParams = {
+      };
+      let queryParams = {
+      };
+      let headerParams = {
+      };
+      let formParams = {
+      };
+
+      let authNames = ['bearerAuth'];
+      let contentTypes = [];
+      let accepts = ['application/json'];
+      let returnType = TrainingPlanListResponse;
+      return this.apiClient.callApi(
+        '/get-training-plans', 'POST',
+        pathParams, queryParams, headerParams, formParams, postBody,
+        authNames, contentTypes, accepts, returnType, null, callback
+      );
+    }
 
     /**
      * Callback function to receive the result of the trainingPlansItemsItemIdDelete operation.
@@ -181,18 +219,18 @@ export default class TrainingApi {
     /**
      * Добавление пункта в план
      * @param {Number} planId 
-     * @param {module:models/TrainingPlansPlanIdItemsPostRequest} trainingPlansPlanIdItemsPostRequest 
+     * @param {module:models/TrainingPlanItemCreate} trainingPlanItemCreate 
      * @param {module:api/TrainingApi~trainingPlansPlanIdItemsPostCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    trainingPlansPlanIdItemsPost(planId, trainingPlansPlanIdItemsPostRequest, callback) {
-      let postBody = trainingPlansPlanIdItemsPostRequest;
+    trainingPlansPlanIdItemsPost(planId, trainingPlanItemCreate, callback) {
+      let postBody = trainingPlanItemCreate;
       // verify the required parameter 'planId' is set
       if (planId === undefined || planId === null) {
         throw new Error("Missing the required parameter 'planId' when calling trainingPlansPlanIdItemsPost");
       }
-      // verify the required parameter 'trainingPlansPlanIdItemsPostRequest' is set
-      if (trainingPlansPlanIdItemsPostRequest === undefined || trainingPlansPlanIdItemsPostRequest === null) {
-        throw new Error("Missing the required parameter 'trainingPlansPlanIdItemsPostRequest' when calling trainingPlansPlanIdItemsPost");
+      // verify the required parameter 'trainingPlanItemCreate' is set
+      if (trainingPlanItemCreate === undefined || trainingPlanItemCreate === null) {
+        throw new Error("Missing the required parameter 'trainingPlanItemCreate' when calling trainingPlansPlanIdItemsPost");
       }
 
       let pathParams = {
@@ -226,14 +264,14 @@ export default class TrainingApi {
 
     /**
      * Создание тренировочного плана
-     * @param {module:models/TrainingPlansPostRequest} trainingPlansPostRequest 
+     * @param {module:models/TrainingPlanCreate} trainingPlanCreate 
      * @param {module:api/TrainingApi~trainingPlansPostCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    trainingPlansPost(trainingPlansPostRequest, callback) {
-      let postBody = trainingPlansPostRequest;
-      // verify the required parameter 'trainingPlansPostRequest' is set
-      if (trainingPlansPostRequest === undefined || trainingPlansPostRequest === null) {
-        throw new Error("Missing the required parameter 'trainingPlansPostRequest' when calling trainingPlansPost");
+    trainingPlansPost(trainingPlanCreate, callback) {
+      let postBody = trainingPlanCreate;
+      // verify the required parameter 'trainingPlanCreate' is set
+      if (trainingPlanCreate === undefined || trainingPlanCreate === null) {
+        throw new Error("Missing the required parameter 'trainingPlanCreate' when calling trainingPlansPost");
       }
 
       let pathParams = {

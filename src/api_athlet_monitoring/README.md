@@ -138,6 +138,8 @@ Class | Method | HTTP request | Description
 *Api.AuthApi* | [**authRegisterInvitePost**](docs/AuthApi.md#authRegisterInvitePost) | **POST** /auth/register/invite | Регистрация по инвайт-коду (для тренеров и врачей)
 *Api.BiometricsApi* | [**biometricsPost**](docs/BiometricsApi.md#biometricsPost) | **POST** /biometrics | Ввод биометрических данных спортсменом
 *Api.TeamsApi* | [**teamAthleteRemovePost**](docs/TeamsApi.md#teamAthleteRemovePost) | **POST** /team/athlete-remove | Удаление спортсмена из команды
+*Api.TeamsApi* | [**teamAthleteTeamStatusGet**](docs/TeamsApi.md#teamAthleteTeamStatusGet) | **GET** /team/athlete-team-status | Заявка на вступление в команду
+*Api.TeamsApi* | [**teamsAllAthletesGet**](docs/TeamsApi.md#teamsAllAthletesGet) | **GET** /teams/all-athletes | Список всех спортсменов
 *Api.TeamsApi* | [**teamsAthletesPost**](docs/TeamsApi.md#teamsAthletesPost) | **POST** /teams/athletes | Список спортсменов в команде
 *Api.TeamsApi* | [**teamsCoachesPost**](docs/TeamsApi.md#teamsCoachesPost) | **POST** /teams/coaches | Список тренеров в команде
 *Api.TeamsApi* | [**teamsCreatePost**](docs/TeamsApi.md#teamsCreatePost) | **POST** /teams/create | Создание команды
@@ -145,6 +147,9 @@ Class | Method | HTTP request | Description
 *Api.TeamsApi* | [**teamsJoinPost**](docs/TeamsApi.md#teamsJoinPost) | **POST** /teams/join | Запрос спортсмена на вступление в команду
 *Api.TeamsApi* | [**teamsJoinRequestIdApprovePost**](docs/TeamsApi.md#teamsJoinRequestIdApprovePost) | **POST** /teams/join/{request_id}/approve | Одобрение заявки на вступление в команду
 *Api.TeamsApi* | [**teamsJoinRequestIdRejectPost**](docs/TeamsApi.md#teamsJoinRequestIdRejectPost) | **POST** /teams/join/{request_id}/reject | Отклонение заявки на вступление в команду
+*Api.TeamsApi* | [**teamsJoinsListGet**](docs/TeamsApi.md#teamsJoinsListGet) | **GET** /teams/joins-list | Список заявок на вступление в команды
+*Api.TeamsApi* | [**teamsJoinsListTeamIdGet**](docs/TeamsApi.md#teamsJoinsListTeamIdGet) | **GET** /teams/joins-list/{team_id} | Список заявок на вступление в команду
+*Api.TrainingApi* | [**getTrainingPlansPost**](docs/TrainingApi.md#getTrainingPlansPost) | **POST** /get-training-plans | Список тренировочных планов
 *Api.TrainingApi* | [**trainingPlansItemsItemIdDelete**](docs/TrainingApi.md#trainingPlansItemsItemIdDelete) | **DELETE** /training-plans/items/{item_id} | Удаление пункта плана
 *Api.TrainingApi* | [**trainingPlansItemsItemIdOverridePost**](docs/TrainingApi.md#trainingPlansItemsItemIdOverridePost) | **POST** /training-plans/items/{item_id}/override | Изменение пункта плана для конкретного спортсмена
 *Api.TrainingApi* | [**trainingPlansPlanIdAssignPost**](docs/TrainingApi.md#trainingPlansPlanIdAssignPost) | **POST** /training-plans/{plan_id}/assign | Назначить план спортсменам
@@ -154,6 +159,7 @@ Class | Method | HTTP request | Description
 
 ## Documentation for Models
 
+ - [Api.AllAthletesResponse](docs/AllAthletesResponse.md)
  - [Api.AthleteProfileRequest](docs/AthleteProfileRequest.md)
  - [Api.AthleteProfileResponse](docs/AthleteProfileResponse.md)
  - [Api.AthleteRegisterRequest](docs/AthleteRegisterRequest.md)
@@ -172,16 +178,21 @@ Class | Method | HTTP request | Description
  - [Api.LoginRequest](docs/LoginRequest.md)
  - [Api.LoginResponse](docs/LoginResponse.md)
  - [Api.Team](docs/Team.md)
+ - [Api.TeamAthleteStatusResponse](docs/TeamAthleteStatusResponse.md)
  - [Api.TeamCreateRequest](docs/TeamCreateRequest.md)
  - [Api.TeamGetAthletesResponse](docs/TeamGetAthletesResponse.md)
  - [Api.TeamGetCoachesResponse](docs/TeamGetCoachesResponse.md)
+ - [Api.TeamJoin](docs/TeamJoin.md)
+ - [Api.TeamJoinRequest](docs/TeamJoinRequest.md)
+ - [Api.TeamJoinsListResponse](docs/TeamJoinsListResponse.md)
  - [Api.TeamRequest](docs/TeamRequest.md)
  - [Api.TeamResponse](docs/TeamResponse.md)
- - [Api.TeamsJoinPostRequest](docs/TeamsJoinPostRequest.md)
+ - [Api.TrainingPlan](docs/TrainingPlan.md)
+ - [Api.TrainingPlanCreate](docs/TrainingPlanCreate.md)
+ - [Api.TrainingPlanItemCreate](docs/TrainingPlanItemCreate.md)
+ - [Api.TrainingPlanListResponse](docs/TrainingPlanListResponse.md)
  - [Api.TrainingPlansItemsItemIdOverridePostRequest](docs/TrainingPlansItemsItemIdOverridePostRequest.md)
  - [Api.TrainingPlansPlanIdAssignPostRequest](docs/TrainingPlansPlanIdAssignPostRequest.md)
- - [Api.TrainingPlansPlanIdItemsPostRequest](docs/TrainingPlansPlanIdItemsPostRequest.md)
- - [Api.TrainingPlansPostRequest](docs/TrainingPlansPostRequest.md)
 
 
 ## Documentation for Authorization

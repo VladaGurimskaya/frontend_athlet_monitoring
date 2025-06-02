@@ -1,10 +1,9 @@
-# Api.AthleteProfileRequest
+# Api.TeamJoinRequest
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**athleteId** | **Number** |  | [optional] 
 **teamId** | **Number** |  | [optional] 
 
 

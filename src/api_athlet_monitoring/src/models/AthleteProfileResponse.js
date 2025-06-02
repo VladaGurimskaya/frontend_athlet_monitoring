@@ -68,6 +68,12 @@ class AthleteProfileResponse {
             if (data.hasOwnProperty('phone')) {
                 obj['phone'] = ApiClient.convertToType(data['phone'], 'String');
             }
+            if (data.hasOwnProperty('team_name')) {
+                obj['team_name'] = ApiClient.convertToType(data['team_name'], 'String');
+            }
+            if (data.hasOwnProperty('team_signed_date')) {
+                obj['team_signed_date'] = ApiClient.convertToType(data['team_signed_date'], 'String');
+            }
         }
         return obj;
     }
@@ -101,6 +107,14 @@ class AthleteProfileResponse {
         // ensure the json data is a string
         if (data['phone'] && !(typeof data['phone'] === 'string' || data['phone'] instanceof String)) {
             throw new Error("Expected the field `phone` to be a primitive type in the JSON string but got " + data['phone']);
+        }
+        // ensure the json data is a string
+        if (data['team_name'] && !(typeof data['team_name'] === 'string' || data['team_name'] instanceof String)) {
+            throw new Error("Expected the field `team_name` to be a primitive type in the JSON string but got " + data['team_name']);
+        }
+        // ensure the json data is a string
+        if (data['team_signed_date'] && !(typeof data['team_signed_date'] === 'string' || data['team_signed_date'] instanceof String)) {
+            throw new Error("Expected the field `team_signed_date` to be a primitive type in the JSON string but got " + data['team_signed_date']);
         }
 
         return true;
@@ -145,6 +159,16 @@ AthleteProfileResponse.prototype['date_of_birth'] = undefined;
  * @member {String} phone
  */
 AthleteProfileResponse.prototype['phone'] = undefined;
+
+/**
+ * @member {String} team_name
+ */
+AthleteProfileResponse.prototype['team_name'] = undefined;
+
+/**
+ * @member {String} team_signed_date
+ */
+AthleteProfileResponse.prototype['team_signed_date'] = undefined;
 
 
 

@@ -290,7 +290,7 @@
               <div v-else class="text-gray-500 text-sm">В команде пока нет спортсменов</div>
             </div>
             <!-- Управление заявками -->
-            <div>
+            <div class="mb-8">
               <div class="flex items-center mb-2">
                 <svg class="h-5 w-5 mr-2 text-primary-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 13V7a2 2 0 00-2-2H6a2 2 0 00-2 2v6m16 0v6a2 2 0 01-2 2H6a2 2 0 01-2-2v-6m16 0H4m4 6h8" />
@@ -366,45 +366,62 @@
     </div>
     
     <!-- Модальное окно профиля спортсмена -->
-    <div v-if="athleteProfile" class="fixed inset-0 z-30 overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+    <div v-if="selectedAthlete" class="fixed inset-0 z-30 overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true">
       <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
-        <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true" @click="athleteProfile = null"></div>
+        <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true" @click="selectedAthlete = null"></div>
         <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
-        <div class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-md w-full">
-          <div class="bg-gradient-to-r from-primary-50 to-primary-100 px-6 py-4 border-b border-gray-200 flex items-center justify-between">
-            <div class="flex items-center">
-              <svg class="h-6 w-6 mr-2 text-primary-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.121 17.804A13.937 13.937 0 0112 15c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0z" />
-              </svg>
-              <span class="text-lg font-medium text-gray-900">Профиль спортсмена</span>
+        <div class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
+          <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+            <div class="sm:flex sm:items-start">
+              <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left w-full">
+                <h3 class="text-lg leading-6 font-medium text-gray-900" id="modal-title">
+                  Профиль спортсмена
+                </h3>
+                <div class="mt-4">
+                  <div class="flex justify-center mb-4">
+                    <div class="h-24 w-24 rounded-full bg-gray-200 flex items-center justify-center">
+                      <span class="text-xl font-medium text-gray-600">{{ selectedAthlete.first_name[0] }}{{ selectedAthlete.last_name[0] }}</span>
+                    </div>
+                  </div>
+                  
+                  <div class="grid grid-cols-1 gap-y-3">
+                    <div>
+                      <h4 class="text-sm font-medium text-gray-500">ФИО</h4>
+                      <p class="text-sm text-gray-900">{{ selectedAthlete.last_name }} {{ selectedAthlete.first_name }} {{ selectedAthlete.middle_name }}</p>
+                    </div>
+                    <div>
+                      <h4 class="text-sm font-medium text-gray-500">Email</h4>
+                      <p class="text-sm text-gray-900">{{ selectedAthlete.email }}</p>
+                    </div>
+                    <div>
+                      <h4 class="text-sm font-medium text-gray-500">Возраст</h4>
+                      <p class="text-sm text-gray-900">{{ selectedAthlete.age }} лет</p>
+                    </div>
+                    <div>
+                      <h4 class="text-sm font-medium text-gray-500">Дата рождения</h4>
+                      <p class="text-sm text-gray-900">{{ formatDate(selectedAthlete.birth_date) }}</p>
+                    </div>
+                    <div>
+                      <h4 class="text-sm font-medium text-gray-500">Команда</h4>
+                      <p class="text-sm text-gray-900">{{ selectedAthlete.team_name }}</p>
+                    </div>
+                    <div v-if="selectedAthlete.medical_info">
+                      <h4 class="text-sm font-medium text-gray-500">Медицинская информация</h4>
+                      <p class="text-sm text-gray-900">{{ selectedAthlete.medical_info }}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
-            <button @click="athleteProfile = null" class="text-gray-400 hover:text-gray-600 focus:outline-none">
-              <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-              </svg>
-            </button>
           </div>
-          <div class="bg-white px-6 pt-6 pb-4">
-            <div class="mb-4">
-              <div class="text-gray-700 font-medium mb-1">ФИО:</div>
-              <div class="text-gray-900">{{ athleteProfile.full_name }}</div>
-            </div>
-            <div class="mb-4">
-              <div class="text-gray-700 font-medium mb-1">Email:</div>
-              <div class="text-gray-900">{{ athleteProfile.email }}</div>
-            </div>
-            <div class="mb-4">
-              <div class="text-gray-700 font-medium mb-1">Дата рождения:</div>
-              <div class="text-gray-900">{{ formatDate(athleteProfile.birth_date) }}</div>
-            </div>
-            <div class="mb-4">
-              <div class="text-gray-700 font-medium mb-1">Телефон:</div>
-              <div class="text-gray-900">{{ athleteProfile.phone || '—' }}</div>
-            </div>
-            <div class="mb-4">
-              <div class="text-gray-700 font-medium mb-1">Статус:</div>
-              <div class="text-gray-900">{{ athleteProfile.status || 'Активен' }}</div>
-            </div>
+          <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+            <button 
+              type="button" 
+              @click="selectedAthlete = null"
+              class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
+            >
+              Закрыть
+            </button>
           </div>
         </div>
       </div>
@@ -507,9 +524,6 @@ const teamModalLoading = ref(false)
 const viewTeam = async (team) => {
   selectedTeam.value = null
   teamModalLoading.value = true
-  let requests = [
-    { id: 3, full_name: 'Сидоров Сидор', email: 'sidorov@mail.ru' }
-  ]
   try {
     const req = new TeamRequest()
     req.team_id = team.team_id
@@ -527,6 +541,14 @@ const viewTeam = async (team) => {
         else resolve({ data, response })
       })
     })
+
+    const { data: requestsData } = await new Promise((resolve, reject) => {
+      teamsApi.teamsJoinsListTeamIdGet(team.team_id, (error, data, response) => {
+        if (error) reject(error)
+        else resolve({ data, response })
+      })
+    })
+
     selectedTeam.value = {
       ...team,
       coaches: (coachesData.coaches || []).map(c => ({
@@ -539,7 +561,12 @@ const viewTeam = async (team) => {
         experience_level: c.experience_level,
         sport_type: c.sport_type
       })),
-      requests,
+      requests: (requestsData.joins || []).map(r => ({
+        id: r.request_id,
+        full_name: [r.second_name, r.first_name, r.middle_name].filter(Boolean).join(' '),
+        email: r.email,
+        status: r.status
+      })),
       athletes: (athletesData.athletes || []).map(a => ({
         id: a.athlete_id,
         full_name: [a.last_name, a.first_name, a.middle_name].filter(Boolean).join(' '),
@@ -550,10 +577,11 @@ const viewTeam = async (team) => {
       }))
     }
   } catch (err) {
+    console.error('Ошибка при загрузке данных команды:', err)
     selectedTeam.value = {
       ...team,
       coaches: [],
-      requests,
+      requests: [],
       athletes: []
     }
   } finally {
@@ -567,6 +595,7 @@ const removeAthlete = async (athlete) => {
   try {
     const req = new AthleteProfileRequest()
     req.athlete_id = athlete.id
+    req.team_id = selectedTeam.value.team_id
     await new Promise((resolve, reject) => {
       teamsApi.teamAthleteRemovePost(req, (error, data, response) => {
         if (error) reject(error)
@@ -580,15 +609,37 @@ const removeAthlete = async (athlete) => {
   }
 }
 
-const acceptRequest = (req) => {
-  // Реализовать принятие заявки через API
-  selectedTeam.value.requests = selectedTeam.value.requests.filter(r => r.id !== req.id)
-  selectedTeam.value.athletes.push({ id: req.id, full_name: req.full_name, email: req.email })
+const acceptRequest = async (req) => {
+  if (!selectedTeam.value) return
+  if (!confirm(`Принять заявку от ${req.full_name}?`)) return
+  try {
+    await new Promise((resolve, reject) => {
+      teamsApi.teamsJoinRequestIdApprovePost(req.id, (error, data, response) => {
+        if (error) reject(error)
+        else resolve({ data, response })
+      })
+    })
+    selectedTeam.value.requests = selectedTeam.value.requests.filter(r => r.id !== req.id)
+    selectedTeam.value.athletes.push({ id: req.id, full_name: req.full_name, email: req.email })
+  } catch (err) {
+    console.error('Ошибка при принятии заявки:', err)
+  }
 }
 
-const declineRequest = (req) => {
-  // Реализовать отклонение заявки через API
-  selectedTeam.value.requests = selectedTeam.value.requests.filter(r => r.id !== req.id)
+const declineRequest = async (req) => {
+  if (!selectedTeam.value) return
+  if (!confirm(`Отклонить заявку от ${req.full_name}?`)) return
+  try {
+    await new Promise((resolve, reject) => {
+      teamsApi.teamsJoinRequestIdRejectPost(req.id, (error, data, response) => {
+        if (error) reject(error)
+        else resolve({ data, response })
+      })
+    })
+    selectedTeam.value.requests = selectedTeam.value.requests.filter(r => r.id !== req.id)
+  } catch (err) {
+    console.error('Ошибка при отклонении заявки:', err)
+  }
 }
 
 const confirmDeleteTeam = (team) => {
@@ -623,11 +674,33 @@ const deleteTeam = async () => {
   }
 }
 
-const athleteProfile = ref(null)
+const selectedAthlete = ref(null)
+
+const calculateAge = (birthDate) => {
+  if (!birthDate) return null
+  const today = new Date()
+  const birth = new Date(birthDate)
+  let age = today.getFullYear() - birth.getFullYear()
+  const monthDiff = today.getMonth() - birth.getMonth()
+  
+  if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birth.getDate())) {
+    age--
+  }
+  
+  return age
+}
 
 const viewAthleteProfile = (athlete) => {
-  // Подгрузить профиль из API, если нужно
-  athleteProfile.value = { ...athlete }
+  // Преобразуем full_name в отдельные поля для отображения
+  const nameParts = athlete.full_name.split(' ')
+  selectedAthlete.value = {
+    ...athlete,
+    last_name: nameParts[0] || '',
+    first_name: nameParts[1] || '',
+    middle_name: nameParts[2] || '',
+    team_name: selectedTeam.value.team_name,
+    age: calculateAge(athlete.birth_date)
+  }
 }
 
 const addSecondCoach = () => {

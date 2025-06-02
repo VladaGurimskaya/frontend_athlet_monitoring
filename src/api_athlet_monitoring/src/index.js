@@ -13,6 +13,7 @@
 
 
 import ApiClient from './ApiClient';
+import AllAthletesResponse from './models/AllAthletesResponse';
 import AthleteProfileRequest from './models/AthleteProfileRequest';
 import AthleteProfileResponse from './models/AthleteProfileResponse';
 import AthleteRegisterRequest from './models/AthleteRegisterRequest';
@@ -31,16 +32,21 @@ import InviteRegisterRequest from './models/InviteRegisterRequest';
 import LoginRequest from './models/LoginRequest';
 import LoginResponse from './models/LoginResponse';
 import Team from './models/Team';
+import TeamAthleteStatusResponse from './models/TeamAthleteStatusResponse';
 import TeamCreateRequest from './models/TeamCreateRequest';
 import TeamGetAthletesResponse from './models/TeamGetAthletesResponse';
 import TeamGetCoachesResponse from './models/TeamGetCoachesResponse';
+import TeamJoin from './models/TeamJoin';
+import TeamJoinRequest from './models/TeamJoinRequest';
+import TeamJoinsListResponse from './models/TeamJoinsListResponse';
 import TeamRequest from './models/TeamRequest';
 import TeamResponse from './models/TeamResponse';
-import TeamsJoinPostRequest from './models/TeamsJoinPostRequest';
+import TrainingPlan from './models/TrainingPlan';
+import TrainingPlanCreate from './models/TrainingPlanCreate';
+import TrainingPlanItemCreate from './models/TrainingPlanItemCreate';
+import TrainingPlanListResponse from './models/TrainingPlanListResponse';
 import TrainingPlansItemsItemIdOverridePostRequest from './models/TrainingPlansItemsItemIdOverridePostRequest';
 import TrainingPlansPlanIdAssignPostRequest from './models/TrainingPlansPlanIdAssignPostRequest';
-import TrainingPlansPlanIdItemsPostRequest from './models/TrainingPlansPlanIdItemsPostRequest';
-import TrainingPlansPostRequest from './models/TrainingPlansPostRequest';
 import AuthApi from './api/AuthApi';
 import BiometricsApi from './api/BiometricsApi';
 import TeamsApi from './api/TeamsApi';
@@ -84,6 +90,12 @@ export {
      * @property {module:ApiClient}
      */
     ApiClient,
+
+    /**
+     * The AllAthletesResponse model constructor.
+     * @property {module:models/AllAthletesResponse}
+     */
+    AllAthletesResponse,
 
     /**
      * The AthleteProfileRequest model constructor.
@@ -194,6 +206,12 @@ export {
     Team,
 
     /**
+     * The TeamAthleteStatusResponse model constructor.
+     * @property {module:models/TeamAthleteStatusResponse}
+     */
+    TeamAthleteStatusResponse,
+
+    /**
      * The TeamCreateRequest model constructor.
      * @property {module:models/TeamCreateRequest}
      */
@@ -212,6 +230,24 @@ export {
     TeamGetCoachesResponse,
 
     /**
+     * The TeamJoin model constructor.
+     * @property {module:models/TeamJoin}
+     */
+    TeamJoin,
+
+    /**
+     * The TeamJoinRequest model constructor.
+     * @property {module:models/TeamJoinRequest}
+     */
+    TeamJoinRequest,
+
+    /**
+     * The TeamJoinsListResponse model constructor.
+     * @property {module:models/TeamJoinsListResponse}
+     */
+    TeamJoinsListResponse,
+
+    /**
      * The TeamRequest model constructor.
      * @property {module:models/TeamRequest}
      */
@@ -224,10 +260,28 @@ export {
     TeamResponse,
 
     /**
-     * The TeamsJoinPostRequest model constructor.
-     * @property {module:models/TeamsJoinPostRequest}
+     * The TrainingPlan model constructor.
+     * @property {module:models/TrainingPlan}
      */
-    TeamsJoinPostRequest,
+    TrainingPlan,
+
+    /**
+     * The TrainingPlanCreate model constructor.
+     * @property {module:models/TrainingPlanCreate}
+     */
+    TrainingPlanCreate,
+
+    /**
+     * The TrainingPlanItemCreate model constructor.
+     * @property {module:models/TrainingPlanItemCreate}
+     */
+    TrainingPlanItemCreate,
+
+    /**
+     * The TrainingPlanListResponse model constructor.
+     * @property {module:models/TrainingPlanListResponse}
+     */
+    TrainingPlanListResponse,
 
     /**
      * The TrainingPlansItemsItemIdOverridePostRequest model constructor.
@@ -240,18 +294,6 @@ export {
      * @property {module:models/TrainingPlansPlanIdAssignPostRequest}
      */
     TrainingPlansPlanIdAssignPostRequest,
-
-    /**
-     * The TrainingPlansPlanIdItemsPostRequest model constructor.
-     * @property {module:models/TrainingPlansPlanIdItemsPostRequest}
-     */
-    TrainingPlansPlanIdItemsPostRequest,
-
-    /**
-     * The TrainingPlansPostRequest model constructor.
-     * @property {module:models/TrainingPlansPostRequest}
-     */
-    TrainingPlansPostRequest,
 
     /**
     * The AuthApi service constructor.

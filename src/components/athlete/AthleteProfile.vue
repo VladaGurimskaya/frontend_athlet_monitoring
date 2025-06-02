@@ -47,10 +47,14 @@
             </h4>
             <div class="space-y-3">
               <div v-if="userProfile.team">
-                <label class="block text-sm font-medium text-gray-500">Текущая команда</label>
-                <p class="mt-1 text-sm text-gray-900">{{ userProfile.team.name }}</p>
+                <label class="block text-sm font-medium text-gray-500">Название команды</label>
+                <p class="mt-1 text-sm text-gray-900">{{ userProfile.team.team_name }}</p>
               </div>
-              <div v-else>
+              <div v-if="userProfile.team">
+                <label class="block text-sm font-medium text-gray-500">Вид спорта</label>
+                <p class="mt-1 text-sm text-gray-900">{{ userProfile.team.sport_type }}</p>
+              </div>
+              <div v-if="!userProfile.team">
                 <p class="text-sm text-gray-500">Вы не состоите в команде</p>
               </div>
             </div>
@@ -60,7 +64,7 @@
     </div>
 
     <!-- Форма подачи заявки -->
-    <div v-if="!userProfile.team" class="bg-white overflow-hidden shadow rounded-lg">
+    <div v-if="!userProfile.team && !loading" class="bg-white overflow-hidden shadow rounded-lg">
       <div class="p-5 border-b border-gray-200 bg-gradient-to-r from-primary-50 to-primary-100">
         <h3 class="text-lg font-medium text-gray-900 flex items-center">
           <svg class="h-6 w-6 mr-2 text-primary-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -74,7 +78,55 @@
       </div>
       
       <div class="px-4 py-5 sm:p-6">
-        <form @submit.prevent="submitTeamRequest" class="space-y-6">
+        <!-- Статус заявки -->
+        <div v-if="teamRequestStatus" class="mb-6">
+          <div :class="[
+            'rounded-md p-4',
+            teamRequestStatus === 'pending' ? 'bg-yellow-50 border border-yellow-200' :
+            teamRequestStatus === 'approved' ? 'bg-green-50 border border-green-200' :
+            'bg-red-50 border border-red-200'
+          ]">
+            <div class="flex">
+              <div class="flex-shrink-0">
+                <svg v-if="teamRequestStatus === 'pending'" class="h-5 w-5 text-yellow-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd" />
+                </svg>
+                <svg v-else-if="teamRequestStatus === 'approved'" class="h-5 w-5 text-green-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                </svg>
+                <svg v-else class="h-5 w-5 text-red-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd" />
+                </svg>
+              </div>
+              <div class="ml-3">
+                <h3 class="text-sm font-medium" :class="[
+                  teamRequestStatus === 'pending' ? 'text-yellow-800' :
+                  teamRequestStatus === 'approved' ? 'text-green-800' :
+                  'text-red-800'
+                ]">
+                  {{ 
+                    teamRequestStatus === 'pending' ? 'Заявка на рассмотрении' :
+                    teamRequestStatus === 'approved' ? 'Заявка принята' :
+                    'Заявка отклонена'
+                  }}
+                </h3>
+                <p class="mt-1 text-sm" :class="[
+                  teamRequestStatus === 'pending' ? 'text-yellow-700' :
+                  teamRequestStatus === 'approved' ? 'text-green-700' :
+                  'text-red-700'
+                ]">
+                  {{ 
+                    teamRequestStatus === 'pending' ? 'Ожидайте решения тренера' :
+                    teamRequestStatus === 'approved' ? 'Вы можете присоединиться к команде' :
+                    'Вы можете подать новую заявку'
+                  }}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <form v-if="!teamRequestStatus" @submit.prevent="submitTeamRequest" class="space-y-6">
           <div v-if="error" class="rounded-md bg-red-50 p-4 border border-red-200">
             <div class="flex">
               <div class="flex-shrink-0">
@@ -121,23 +173,6 @@
                   {{ team.name }}
                 </option>
               </select>
-            </div>
-
-            <div class="bg-gray-50 p-4 rounded-lg border border-gray-200">
-              <label for="message" class="block text-sm font-medium text-gray-700 mb-2 flex items-center">
-                <svg class="h-5 w-5 mr-2 text-primary-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
-                </svg>
-                Сообщение тренеру
-              </label>
-              <textarea
-                id="message"
-                v-model="message"
-                rows="3"
-                :disabled="loading"
-                class="block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 sm:text-sm py-2.5 bg-white pl-12"
-                placeholder="Напишите, почему хотите вступить в команду"
-              ></textarea>
             </div>
           </div>
 
@@ -283,7 +318,7 @@
 
 <script setup>
 import { ref, onMounted } from 'vue'
-import { AuthApi, ApiClient, AthleteProfileRequest } from '../../api_athlet_monitoring/src'
+import { AuthApi, ApiClient, AthleteProfileRequest, TeamsApi, TeamJoinRequest } from '../../api_athlet_monitoring/src'
 
 // Создаем экземпляр API клиента
 const apiClient = new ApiClient()
@@ -291,14 +326,7 @@ apiClient.basePath = 'http://localhost:8000/api/v1'
 apiClient.enableCookies = true
 
 const authApi = new AuthApi(apiClient)
-
-// Моковые данные для списка команд
-const mockTeams = [
-  { id: 1, name: 'Команда "Олимпийцы"' },
-  { id: 2, name: 'Команда "Спарта"' },
-  { id: 3, name: 'Команда "Чемпионы"' },
-  { id: 4, name: 'Команда "Победители"' }
-]
+const teamsApi = new TeamsApi(apiClient)
 
 const userProfile = ref({
   full_name: '',
@@ -306,12 +334,13 @@ const userProfile = ref({
   birth_date: '',
   team: null
 })
-const availableTeams = ref(mockTeams)
+const availableTeams = ref([])
 const selectedTeam = ref('')
 const message = ref('')
 const loading = ref(false)
 const error = ref(null)
 const success = ref(null)
+const teamRequestStatus = ref(null)
 
 // Состояние для формы изменения пароля
 const currentPassword = ref('')
@@ -344,11 +373,50 @@ const loadUserProfile = async () => {
       })
     })
 
-    userProfile.value = {
-      full_name: `${data.last_name} ${data.first_name} ${data.middle_name}`,
-      email: data.email,
-      birth_date: data.date_of_birth,
-      team: data.team
+    // Загружаем информацию о команде
+    const teamRequest = new AthleteProfileRequest()
+    teamRequest.athlete_id = 0
+
+    try {
+      const teamData = await new Promise((resolve, reject) => {
+        authApi.authAthleteTeamPost(teamRequest, (error, data, response) => {
+          if (error) {
+            reject(error)
+          } else {
+            resolve({ data, response })
+          }
+        })
+      })
+
+      userProfile.value = {
+        full_name: `${data.last_name} ${data.first_name} ${data.middle_name}`,
+        email: data.email,
+        birth_date: data.date_of_birth,
+        team: teamData.data
+      }
+    } catch (teamErr) {
+      // Если нет команды, проверяем статус заявки
+      userProfile.value = {
+        full_name: `${data.last_name} ${data.first_name} ${data.middle_name}`,
+        email: data.email,
+        birth_date: data.date_of_birth,
+        team: null
+      }
+
+      try {
+        const statusData = await new Promise((resolve, reject) => {
+          teamsApi.teamAthleteTeamStatusGet((error, data, response) => {
+            if (error) {
+              reject(error)
+            } else {
+              resolve({ data, response })
+            }
+          })
+        })
+        teamRequestStatus.value = statusData.data.status
+      } catch (statusErr) {
+        teamRequestStatus.value = null
+      }
     }
   } catch (err) {
     console.error('Ошибка при загрузке профиля:', err)
@@ -360,12 +428,31 @@ const loadUserProfile = async () => {
 
 const loadAvailableTeams = async () => {
   try {
-    // Имитация задержки загрузки
-    await new Promise(resolve => setTimeout(resolve, 500))
-    availableTeams.value = mockTeams
+    loading.value = true
+    error.value = null
+
+    const { data } = await new Promise((resolve, reject) => {
+      teamsApi.teamsGet((error, data, response) => {
+        if (error) reject(error)
+        else resolve({ data, response })
+      })
+    })
+
+    if (data && data.teams && Array.isArray(data.teams)) {
+      availableTeams.value = data.teams.map(team => ({
+        id: team.team_id,
+        name: team.team_name
+      }))
+    } else {
+      console.error('Неожиданная структура данных:', data)
+      availableTeams.value = []
+    }
   } catch (err) {
     console.error('Ошибка при загрузке списка команд:', err)
     error.value = 'Не удалось загрузить список команд'
+    availableTeams.value = []
+  } finally {
+    loading.value = false
   }
 }
 
@@ -375,16 +462,38 @@ const submitTeamRequest = async () => {
   success.value = null
 
   try {
-    // Имитация задержки отправки
-    await new Promise(resolve => setTimeout(resolve, 1000))
+    const request = new TeamJoinRequest()
+    request.team_id = parseInt(selectedTeam.value)
+
+    await new Promise((resolve, reject) => {
+      teamsApi.teamsJoinPost(request, (error, data, response) => {
+        if (error) reject(error)
+        else resolve({ data, response })
+      })
+    })
     
-    // Имитация успешной отправки
     success.value = 'Заявка успешно отправлена'
     selectedTeam.value = ''
     message.value = ''
+    
+    // Обновляем статус заявки сразу после отправки
+    try {
+      const statusData = await new Promise((resolve, reject) => {
+        teamsApi.teamAthleteTeamStatusGet((error, data, response) => {
+          if (error) {
+            reject(error)
+          } else {
+            resolve({ data, response })
+          }
+        })
+      })
+      teamRequestStatus.value = statusData.data.status
+    } catch (statusErr) {
+      console.error('Ошибка при получении статуса заявки:', statusErr)
+    }
   } catch (err) {
     console.error('Ошибка при отправке заявки:', err)
-    error.value = 'Не удалось отправить заявку'
+    error.value = err.message || 'Не удалось отправить заявку'
   } finally {
     loading.value = false
   }

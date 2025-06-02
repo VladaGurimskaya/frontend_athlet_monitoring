@@ -1,28 +1,47 @@
 <template>
   <div class="bg-white overflow-hidden shadow rounded-lg">
-    <div class="p-5 border-b border-gray-200 flex justify-between items-center">
-      <h3 class="text-lg font-medium text-gray-900">Мои спортсмены</h3>
-      <div class="flex space-x-2">
-        <div class="relative">
-          <input
-            type="text"
-            v-model="searchQuery"
-            placeholder="Поиск спортсменов"
-            class="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-primary-500 focus:border-primary-500 text-sm"
-          />
-          <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
-            <svg class="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-              <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd" />
-            </svg>
+    <div class="p-5 border-b border-gray-200 bg-gradient-to-r from-primary-50 to-primary-100">
+      <div class="flex justify-between items-center">
+        <h3 class="text-lg font-medium text-gray-900 flex items-center">
+          <svg class="h-6 w-6 mr-2 text-primary-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a4 4 0 00-3-3.87M9 20H4v-2a4 4 0 013-3.87m13-7a4 4 0 11-8 0 4 4 0 018 0zM5 7a4 4 0 108 0 4 4 0 00-8 0z" />
+          </svg>
+          Мои спортсмены
+        </h3>
+      </div>
+      <div class="mt-2 text-sm text-gray-600">
+        <p>Управление спортсменами и их профилями</p>
+      </div>
+    </div>
+
+    <div class="px-4 py-4 border-b border-gray-200 bg-gray-50">
+      <div class="flex space-x-4">
+        <div class="flex items-center">
+          <label class="text-sm text-gray-600 mr-2">Поиск:</label>
+          <div class="relative">
+            <input
+              type="text"
+              v-model="searchQuery"
+              placeholder="Поиск спортсменов"
+              class="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-primary-500 focus:border-primary-500 text-sm bg-white w-64"
+            />
+            <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+              <svg class="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd" />
+              </svg>
+            </div>
           </div>
         </div>
-        <select 
-          v-model="teamFilter" 
-          class="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-primary-500 focus:border-primary-500 text-sm"
-        >
-          <option value="">Все команды</option>
-          <option v-for="team in teams" :key="team.id" :value="team.id">{{ team.name }}</option>
-        </select>
+        <div class="flex items-center">
+          <label class="text-sm text-gray-600 mr-2">Команда:</label>
+          <select 
+            v-model="teamFilter" 
+            class="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-primary-500 focus:border-primary-500 text-sm bg-white"
+          >
+            <option value="">Все команды</option>
+            <option v-for="team in teams" :key="team.name" :value="team.name">{{ team.name }}</option>
+          </select>
+        </div>
       </div>
     </div>
     
@@ -46,9 +65,6 @@
               </th>
               <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                 Дата присоединения
-              </th>
-              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Статус
               </th>
               <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                 Действия
@@ -78,20 +94,10 @@
                 <div class="text-sm text-gray-900">{{ athlete.age }} лет</div>
               </td>
               <td class="px-6 py-4 whitespace-nowrap">
-                <div class="text-sm text-gray-900">{{ getTeamName(athlete.team_id) }}</div>
+                <div class="text-sm text-gray-900">{{ athlete.team_name }}</div>
               </td>
               <td class="px-6 py-4 whitespace-nowrap">
                 <div class="text-sm text-gray-900">{{ formatDate(athlete.join_date) }}</div>
-              </td>
-              <td class="px-6 py-4 whitespace-nowrap">
-                <span 
-                  :class="[
-                    athlete.status === 'active' ? 'bg-green-100 text-green-800' : athlete.status === 'inactive' ? 'bg-gray-100 text-gray-800' : 'bg-yellow-100 text-yellow-800',
-                    'px-2 inline-flex text-xs leading-5 font-semibold rounded-full'
-                  ]"
-                >
-                  {{ getStatusText(athlete.status) }}
-                </span>
               </td>
               <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
                 <button @click="viewAthleteProfile(athlete)" class="text-primary-600 hover:text-primary-900 mr-3">
@@ -141,11 +147,7 @@
                     </div>
                     <div>
                       <h4 class="text-sm font-medium text-gray-500">Команда</h4>
-                      <p class="text-sm text-gray-900">{{ getTeamName(selectedAthlete.team_id) }}</p>
-                    </div>
-                    <div>
-                      <h4 class="text-sm font-medium text-gray-500">Статус</h4>
-                      <p class="text-sm text-gray-900">{{ getStatusText(selectedAthlete.status) }}</p>
+                      <p class="text-sm text-gray-900">{{ selectedAthlete.team_name }}</p>
                     </div>
                     <div v-if="selectedAthlete.medical_info">
                       <h4 class="text-sm font-medium text-gray-500">Медицинская информация</h4>
@@ -173,85 +175,104 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted } from 'vue'
+import { TeamsApi, ApiClient } from '../../api_athlet_monitoring/src'
 
-const teams = ref([
-  { id: 1, name: 'Легкоатлетический клуб "Спринт"' },
-  { id: 2, name: 'Лыжная команда "Снежинка"' },
-  { id: 3, name: 'Велоклуб "Колесо"' }
-])
+// Создаем экземпляр API клиента
+const apiClient = new ApiClient()
+apiClient.basePath = 'http://localhost:8000/api/v1'
+apiClient.enableCookies = true
 
-const athletes = ref([
-  { 
-    id: 1, 
-    first_name: 'Иван', 
-    last_name: 'Иванов', 
-    middle_name: 'Иванович', 
-    email: 'ivanov@example.com', 
-    age: 18, 
-    birth_date: '2005-05-10',
-    team_id: 1, 
-    status: 'active', 
-    join_date: '2022-01-15',
-    medical_info: 'Нет противопоказаний, функциональная готовность 90%'
-  },
-  { 
-    id: 2, 
-    first_name: 'Петр', 
-    last_name: 'Петров', 
-    middle_name: 'Петрович', 
-    email: 'petrov@example.com', 
-    age: 17, 
-    birth_date: '2006-03-22',
-    team_id: 1, 
-    status: 'active', 
-    join_date: '2022-02-10',
-    medical_info: 'Ограничения по нагрузке на коленный сустав, восстановление после травмы'
-  },
-  { 
-    id: 3, 
-    first_name: 'Анна', 
-    last_name: 'Смирнова', 
-    middle_name: 'Сергеевна', 
-    email: 'smirnova@example.com', 
-    age: 16, 
-    birth_date: '2007-08-15',
-    team_id: 3, 
-    status: 'active', 
-    join_date: '2022-03-05',
-    medical_info: 'Повышенная степень восстановления, потенциал для аэробной работы высокий'
-  },
-  { 
-    id: 4, 
-    first_name: 'Сергей', 
-    last_name: 'Кузнецов', 
-    middle_name: 'Андреевич', 
-    email: 'kuznetsov@example.com', 
-    age: 19, 
-    birth_date: '2004-11-30',
-    team_id: 2, 
-    status: 'inactive', 
-    join_date: '2021-09-20',
-    medical_info: 'Аллергия на пыльцу, сезонные ограничения для тренировок на открытом воздухе'
-  },
-  { 
-    id: 5, 
-    first_name: 'Мария', 
-    last_name: 'Козлова', 
-    middle_name: 'Дмитриевна', 
-    email: 'kozlova@example.com', 
-    age: 17, 
-    birth_date: '2006-07-12',
-    team_id: 3, 
-    status: 'pending', 
-    join_date: '2023-01-10',
-    medical_info: 'Высокий порог аэробного метаболизма, потенциал для длительных нагрузок'
-  }
-])
+const teamsApi = new TeamsApi(apiClient)
 
+const teams = ref([])
+const athletes = ref([])
 const searchQuery = ref('')
 const teamFilter = ref('')
 const selectedAthlete = ref(null)
+const loading = ref(false)
+const error = ref(null)
+
+const loadTeams = async () => {
+  try {
+    loading.value = true
+    error.value = null
+
+    const { data } = await new Promise((resolve, reject) => {
+      teamsApi.teamsGet((error, data, response) => {
+        if (error) reject(error)
+        else resolve({ data, response })
+      })
+    })
+
+    if (data && data.teams && Array.isArray(data.teams)) {
+      teams.value = data.teams.map(team => ({
+        id: team.team_id,
+        name: team.team_name
+      }))
+    }
+  } catch (err) {
+    console.error('Ошибка при загрузке списка команд:', err)
+    error.value = 'Не удалось загрузить список команд'
+  } finally {
+    loading.value = false
+  }
+}
+
+const loadAthletes = async () => {
+  try {
+    loading.value = true
+    error.value = null
+
+    const { data } = await new Promise((resolve, reject) => {
+      teamsApi.teamsAllAthletesGet((error, data, response) => {
+        if (error) reject(error)
+        else resolve({ data, response })
+      })
+    })
+
+    console.log(data)
+
+    if (data && data.athletes && Array.isArray(data.athletes)) {
+      athletes.value = data.athletes.map(athlete => ({
+        id: athlete.athlete_id,
+        first_name: athlete.first_name,
+        last_name: athlete.last_name,
+        middle_name: athlete.middle_name,
+        email: athlete.email,
+        age: calculateAge(athlete.date_of_birth),
+        birth_date: athlete.date_of_birth,
+        team_name: athlete.team_name,
+        status: athlete.status || 'active',
+        join_date: athlete.team_signed_date
+      }))
+    }
+  } catch (err) {
+    console.error('Ошибка при загрузке списка спортсменов:', err)
+    error.value = 'Не удалось загрузить список спортсменов'
+  } finally {
+    loading.value = false
+  }
+}
+
+const calculateAge = (birthDate) => {
+  if (!birthDate) return null
+  const today = new Date()
+  const birth = new Date(birthDate)
+  let age = today.getFullYear() - birth.getFullYear()
+  const monthDiff = today.getMonth() - birth.getMonth()
+  
+  if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birth.getDate())) {
+    age--
+  }
+  
+  return age
+}
+
+onMounted(() => {
+  loadTeams()
+  loadAthletes()
+})
 
 const filteredAthletes = computed(() => {
   return athletes.value.filter(athlete => {
@@ -260,7 +281,7 @@ const filteredAthletes = computed(() => {
       athlete.first_name.toLowerCase().includes(searchQuery.value.toLowerCase()) ||
       athlete.email.toLowerCase().includes(searchQuery.value.toLowerCase())
     
-    const matchesTeam = teamFilter.value === '' || athlete.team_id === parseInt(teamFilter.value)
+    const matchesTeam = teamFilter.value === '' || athlete.team_name === teamFilter.value
     
     return matchesSearch && matchesTeam
   })

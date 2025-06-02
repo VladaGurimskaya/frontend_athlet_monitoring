@@ -4,12 +4,56 @@ All URIs are relative to *http://localhost:8000/api/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
+[**getTrainingPlansPost**](TrainingApi.md#getTrainingPlansPost) | **POST** /get-training-plans | Список тренировочных планов
 [**trainingPlansItemsItemIdDelete**](TrainingApi.md#trainingPlansItemsItemIdDelete) | **DELETE** /training-plans/items/{item_id} | Удаление пункта плана
 [**trainingPlansItemsItemIdOverridePost**](TrainingApi.md#trainingPlansItemsItemIdOverridePost) | **POST** /training-plans/items/{item_id}/override | Изменение пункта плана для конкретного спортсмена
 [**trainingPlansPlanIdAssignPost**](TrainingApi.md#trainingPlansPlanIdAssignPost) | **POST** /training-plans/{plan_id}/assign | Назначить план спортсменам
 [**trainingPlansPlanIdItemsPost**](TrainingApi.md#trainingPlansPlanIdItemsPost) | **POST** /training-plans/{plan_id}/items | Добавление пункта в план
 [**trainingPlansPost**](TrainingApi.md#trainingPlansPost) | **POST** /training-plans | Создание тренировочного плана
 
+
+
+## getTrainingPlansPost
+
+> TrainingPlanListResponse getTrainingPlansPost()
+
+Список тренировочных планов
+
+### Example
+
+```javascript
+import Api from '____api';
+let defaultClient = Api.ApiClient.instance;
+// Configure Bearer (JWT) access token for authorization: bearerAuth
+let bearerAuth = defaultClient.authentications['bearerAuth'];
+bearerAuth.accessToken = "YOUR ACCESS TOKEN"
+
+let apiInstance = new Api.TrainingApi();
+apiInstance.getTrainingPlansPost((error, data, response) => {
+  if (error) {
+    console.error(error);
+  } else {
+    console.log('API called successfully. Returned data: ' + data);
+  }
+});
+```
+
+### Parameters
+
+This endpoint does not need any parameter.
+
+### Return type
+
+[**TrainingPlanListResponse**](TrainingPlanListResponse.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
 
 
 ## trainingPlansItemsItemIdDelete
@@ -159,7 +203,7 @@ null (empty response body)
 
 ## trainingPlansPlanIdItemsPost
 
-> trainingPlansPlanIdItemsPost(planId, trainingPlansPlanIdItemsPostRequest)
+> trainingPlansPlanIdItemsPost(planId, trainingPlanItemCreate)
 
 Добавление пункта в план
 
@@ -174,8 +218,8 @@ bearerAuth.accessToken = "YOUR ACCESS TOKEN"
 
 let apiInstance = new Api.TrainingApi();
 let planId = 56; // Number | 
-let trainingPlansPlanIdItemsPostRequest = {"session_date":"2025-04-18","session_type_id":2,"format_type_id":1,"value":"01:30","notes":"Лёгкий кросс по парку"}; // TrainingPlansPlanIdItemsPostRequest | 
-apiInstance.trainingPlansPlanIdItemsPost(planId, trainingPlansPlanIdItemsPostRequest, (error, data, response) => {
+let trainingPlanItemCreate = new Api.TrainingPlanItemCreate(); // TrainingPlanItemCreate | 
+apiInstance.trainingPlansPlanIdItemsPost(planId, trainingPlanItemCreate, (error, data, response) => {
   if (error) {
     console.error(error);
   } else {
@@ -190,7 +234,7 @@ apiInstance.trainingPlansPlanIdItemsPost(planId, trainingPlansPlanIdItemsPostReq
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **planId** | **Number**|  | 
- **trainingPlansPlanIdItemsPostRequest** | [**TrainingPlansPlanIdItemsPostRequest**](TrainingPlansPlanIdItemsPostRequest.md)|  | 
+ **trainingPlanItemCreate** | [**TrainingPlanItemCreate**](TrainingPlanItemCreate.md)|  | 
 
 ### Return type
 
@@ -208,7 +252,7 @@ null (empty response body)
 
 ## trainingPlansPost
 
-> trainingPlansPost(trainingPlansPostRequest)
+> trainingPlansPost(trainingPlanCreate)
 
 Создание тренировочного плана
 
@@ -222,8 +266,8 @@ let bearerAuth = defaultClient.authentications['bearerAuth'];
 bearerAuth.accessToken = "YOUR ACCESS TOKEN"
 
 let apiInstance = new Api.TrainingApi();
-let trainingPlansPostRequest = {"name":"Подготовка к сбору","description":"Базовый цикл подготовки"}; // TrainingPlansPostRequest | 
-apiInstance.trainingPlansPost(trainingPlansPostRequest, (error, data, response) => {
+let trainingPlanCreate = new Api.TrainingPlanCreate(); // TrainingPlanCreate | 
+apiInstance.trainingPlansPost(trainingPlanCreate, (error, data, response) => {
   if (error) {
     console.error(error);
   } else {
@@ -237,7 +281,7 @@ apiInstance.trainingPlansPost(trainingPlansPostRequest, (error, data, response) 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **trainingPlansPostRequest** | [**TrainingPlansPostRequest**](TrainingPlansPostRequest.md)|  | 
+ **trainingPlanCreate** | [**TrainingPlanCreate**](TrainingPlanCreate.md)|  | 
 
 ### Return type
 
