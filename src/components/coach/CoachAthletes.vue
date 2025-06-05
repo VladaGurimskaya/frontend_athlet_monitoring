@@ -178,7 +178,6 @@
 import { ref, computed, onMounted } from 'vue'
 import { TeamsApi, ApiClient } from '../../api_athlet_monitoring/src'
 
-// Создаем экземпляр API клиента
 const apiClient = new ApiClient()
 apiClient.basePath = 'http://localhost:8000/api/v1'
 apiClient.enableCookies = true

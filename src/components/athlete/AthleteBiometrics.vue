@@ -123,6 +123,24 @@
               </div>
             </div>
           </div>
+
+          <!-- Комментарий о самочувствии -->
+          <div class="bg-gray-50 p-4 rounded-lg border border-gray-200">
+            <label for="wellness-comment" class="block text-sm font-medium text-gray-700 mb-2 flex items-center">
+              <svg class="h-5 w-5 mr-2 text-primary-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8h2a2 2 0 012 2v8a2 2 0 01-2 2H7a2 2 0 01-2-2V10a2 2 0 012-2h2" />
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 3h6m0 0v6m0-6L9 15" />
+              </svg>
+              Комментарий о самочувствии (необязательно)
+            </label>
+            <textarea
+              id="wellness-comment"
+              v-model="wellnessComment"
+              rows="3"
+              class="block w-full border border-gray-300 rounded-md p-3 text-sm focus:ring-primary-500 focus:border-primary-500"
+              placeholder="Опишите ваше самочувствие, усталость, настроение, жалобы и т.д."
+            ></textarea>
+          </div>
         </div>
 
         <div class="flex justify-end pt-4 border-t border-gray-200">
@@ -155,6 +173,7 @@ const eveningPulse = ref('')
 const weight = ref('')
 const weightFrequency = ref('daily')
 const hrv = ref('')
+const wellnessComment = ref('')
 const loading = ref(false)
 
 const apiClient = new ApiClient()
@@ -184,6 +203,10 @@ const submitBiometrics = async () => {
       biometricData.weight = parseFloat(weight.value)
     }
     
+    if (wellnessComment.value) {
+      biometricData.comment = wellnessComment.value
+    }
+    
     await new Promise((resolve, reject) => {
       biometricsApi.biometricsPost(biometricData, (error, data, response) => {
         if (error) reject(error)
@@ -195,6 +218,7 @@ const submitBiometrics = async () => {
     eveningPulse.value = ''
     weight.value = ''
     hrv.value = ''
+    wellnessComment.value = ''
     
     alert('Данные успешно сохранены')
   } catch (error) {

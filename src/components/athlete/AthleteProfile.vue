@@ -1,8 +1,6 @@
 <template>
   <div class="space-y-6">
-    <!-- Блок профиля -->
     <div class="bg-white overflow-hidden shadow rounded-lg">
-      <!-- Заголовок профиля -->
       <div class="p-5 border-b border-gray-200 bg-gradient-to-r from-primary-50 to-primary-100">
         <h3 class="text-lg font-medium text-gray-900 flex items-center">
           <svg class="h-6 w-6 mr-2 text-primary-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -320,7 +318,6 @@
 import { ref, onMounted } from 'vue'
 import { AuthApi, ApiClient, AthleteProfileRequest, TeamsApi, TeamJoinRequest } from '../../api_athlet_monitoring/src'
 
-// Создаем экземпляр API клиента
 const apiClient = new ApiClient()
 apiClient.basePath = 'http://localhost:8000/api/v1'
 apiClient.enableCookies = true
@@ -342,7 +339,6 @@ const error = ref(null)
 const success = ref(null)
 const teamRequestStatus = ref(null)
 
-// Состояние для формы изменения пароля
 const currentPassword = ref('')
 const newPassword = ref('')
 const confirmPassword = ref('')
@@ -395,7 +391,6 @@ const loadUserProfile = async () => {
         team: teamData.data
       }
     } catch (teamErr) {
-      // Если нет команды, проверяем статус заявки
       userProfile.value = {
         full_name: `${data.last_name} ${data.first_name} ${data.middle_name}`,
         email: data.email,
@@ -505,7 +500,6 @@ const changePassword = async () => {
   passwordSuccess.value = null
 
   try {
-    // Валидация паролей
     if (newPassword.value !== confirmPassword.value) {
       throw new Error('Пароли не совпадают')
     }
@@ -514,19 +508,15 @@ const changePassword = async () => {
       throw new Error('Новый пароль должен содержать минимум 8 символов')
     }
 
-    // Создаем экземпляр API клиента
     const apiClient = new ApiClient()
-    // Включаем отправку куки
     apiClient.enableCookies = true
     const authApi = new AuthApi(apiClient)
 
-    // Создаем запрос на смену пароля
     const request = {
       old_password: currentPassword.value,
       new_password: newPassword.value
     }
 
-    // Отправляем запрос
     await new Promise((resolve, reject) => {
       authApi.authChangePasswordPost(request, (error) => {
         if (error) {
@@ -537,7 +527,6 @@ const changePassword = async () => {
       })
     })
     
-    // Очищаем поля после успешной смены пароля
     passwordSuccess.value = 'Пароль успешно изменен'
     currentPassword.value = ''
     newPassword.value = ''

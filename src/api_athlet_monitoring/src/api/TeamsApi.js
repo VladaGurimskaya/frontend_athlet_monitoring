@@ -15,11 +15,17 @@
 import ApiClient from "../ApiClient";
 import AllAthletesResponse from '../models/AllAthletesResponse';
 import AthleteProfileRequest from '../models/AthleteProfileRequest';
+import CriticalAthleteRequest from '../models/CriticalAthleteRequest';
+import CriticalAthleteResponse from '../models/CriticalAthleteResponse';
+import CriticalAthletesResponse from '../models/CriticalAthletesResponse';
 import ErrorResponse from '../models/ErrorResponse';
+import ReferAthletesToMedicalstaffRequest from '../models/ReferAthletesToMedicalstaffRequest';
 import TeamAthleteStatusResponse from '../models/TeamAthleteStatusResponse';
 import TeamCreateRequest from '../models/TeamCreateRequest';
 import TeamGetAthletesResponse from '../models/TeamGetAthletesResponse';
 import TeamGetCoachesResponse from '../models/TeamGetCoachesResponse';
+import TeamGetMedicalAssignmentsResponse from '../models/TeamGetMedicalAssignmentsResponse';
+import TeamGetMedicalstaffResponse from '../models/TeamGetMedicalstaffResponse';
 import TeamJoinRequest from '../models/TeamJoinRequest';
 import TeamJoinsListResponse from '../models/TeamJoinsListResponse';
 import TeamRequest from '../models/TeamRequest';
@@ -115,6 +121,42 @@ export default class TeamsApi {
       let returnType = TeamAthleteStatusResponse;
       return this.apiClient.callApi(
         '/team/athlete-team-status', 'GET',
+        pathParams, queryParams, headerParams, formParams, postBody,
+        authNames, contentTypes, accepts, returnType, null, callback
+      );
+    }
+
+    /**
+     * Callback function to receive the result of the teamGetCriticalAthletesGet operation.
+     * @callback module:api/TeamsApi~teamGetCriticalAthletesGetCallback
+     * @param {String} error Error message, if any.
+     * @param {module:models/CriticalAthletesResponse} data The data returned by the service call.
+     * @param {String} response The complete HTTP response.
+     */
+
+    /**
+     * Список критических спортсменов
+     * @param {module:api/TeamsApi~teamGetCriticalAthletesGetCallback} callback The callback function, accepting three arguments: error, data, response
+     * data is of type: {@link module:models/CriticalAthletesResponse}
+     */
+    teamGetCriticalAthletesGet(callback) {
+      let postBody = null;
+
+      let pathParams = {
+      };
+      let queryParams = {
+      };
+      let headerParams = {
+      };
+      let formParams = {
+      };
+
+      let authNames = ['bearerAuth'];
+      let contentTypes = [];
+      let accepts = ['application/json'];
+      let returnType = CriticalAthletesResponse;
+      return this.apiClient.callApi(
+        '/team/get-critical-athletes', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
         authNames, contentTypes, accepts, returnType, null, callback
       );
@@ -315,6 +357,83 @@ export default class TeamsApi {
     }
 
     /**
+     * Callback function to receive the result of the teamsGetCriticalAthletePost operation.
+     * @callback module:api/TeamsApi~teamsGetCriticalAthletePostCallback
+     * @param {String} error Error message, if any.
+     * @param {module:models/CriticalAthleteResponse} data The data returned by the service call.
+     * @param {String} response The complete HTTP response.
+     */
+
+    /**
+     * Список критических спортсменов в команде
+     * @param {module:models/CriticalAthleteRequest} criticalAthleteRequest 
+     * @param {module:api/TeamsApi~teamsGetCriticalAthletePostCallback} callback The callback function, accepting three arguments: error, data, response
+     * data is of type: {@link module:models/CriticalAthleteResponse}
+     */
+    teamsGetCriticalAthletePost(criticalAthleteRequest, callback) {
+      let postBody = criticalAthleteRequest;
+      // verify the required parameter 'criticalAthleteRequest' is set
+      if (criticalAthleteRequest === undefined || criticalAthleteRequest === null) {
+        throw new Error("Missing the required parameter 'criticalAthleteRequest' when calling teamsGetCriticalAthletePost");
+      }
+
+      let pathParams = {
+      };
+      let queryParams = {
+      };
+      let headerParams = {
+      };
+      let formParams = {
+      };
+
+      let authNames = ['bearerAuth'];
+      let contentTypes = ['application/json'];
+      let accepts = ['application/json'];
+      let returnType = CriticalAthleteResponse;
+      return this.apiClient.callApi(
+        '/teams/get-critical-athlete', 'POST',
+        pathParams, queryParams, headerParams, formParams, postBody,
+        authNames, contentTypes, accepts, returnType, null, callback
+      );
+    }
+
+    /**
+     * Callback function to receive the result of the teamsGetMedicalAssigmentsGet operation.
+     * @callback module:api/TeamsApi~teamsGetMedicalAssigmentsGetCallback
+     * @param {String} error Error message, if any.
+     * @param {module:models/TeamGetMedicalAssignmentsResponse} data The data returned by the service call.
+     * @param {String} response The complete HTTP response.
+     */
+
+    /**
+     * Список медицинских назначений
+     * @param {module:api/TeamsApi~teamsGetMedicalAssigmentsGetCallback} callback The callback function, accepting three arguments: error, data, response
+     * data is of type: {@link module:models/TeamGetMedicalAssignmentsResponse}
+     */
+    teamsGetMedicalAssigmentsGet(callback) {
+      let postBody = null;
+
+      let pathParams = {
+      };
+      let queryParams = {
+      };
+      let headerParams = {
+      };
+      let formParams = {
+      };
+
+      let authNames = ['bearerAuth'];
+      let contentTypes = [];
+      let accepts = ['application/json'];
+      let returnType = TeamGetMedicalAssignmentsResponse;
+      return this.apiClient.callApi(
+        '/teams/get-medical-assigments', 'GET',
+        pathParams, queryParams, headerParams, formParams, postBody,
+        authNames, contentTypes, accepts, returnType, null, callback
+      );
+    }
+
+    /**
      * Callback function to receive the result of the teamsJoinPost operation.
      * @callback module:api/TeamsApi~teamsJoinPostCallback
      * @param {String} error Error message, if any.
@@ -509,6 +628,82 @@ export default class TeamsApi {
       let returnType = TeamJoinsListResponse;
       return this.apiClient.callApi(
         '/teams/joins-list/{team_id}', 'GET',
+        pathParams, queryParams, headerParams, formParams, postBody,
+        authNames, contentTypes, accepts, returnType, null, callback
+      );
+    }
+
+    /**
+     * Callback function to receive the result of the teamsMedicalstaffGet operation.
+     * @callback module:api/TeamsApi~teamsMedicalstaffGetCallback
+     * @param {String} error Error message, if any.
+     * @param {module:models/TeamGetMedicalstaffResponse} data The data returned by the service call.
+     * @param {String} response The complete HTTP response.
+     */
+
+    /**
+     * Список медицинского персонала в команде
+     * @param {module:api/TeamsApi~teamsMedicalstaffGetCallback} callback The callback function, accepting three arguments: error, data, response
+     * data is of type: {@link module:models/TeamGetMedicalstaffResponse}
+     */
+    teamsMedicalstaffGet(callback) {
+      let postBody = null;
+
+      let pathParams = {
+      };
+      let queryParams = {
+      };
+      let headerParams = {
+      };
+      let formParams = {
+      };
+
+      let authNames = ['bearerAuth'];
+      let contentTypes = [];
+      let accepts = ['application/json'];
+      let returnType = TeamGetMedicalstaffResponse;
+      return this.apiClient.callApi(
+        '/teams/medicalstaff', 'GET',
+        pathParams, queryParams, headerParams, formParams, postBody,
+        authNames, contentTypes, accepts, returnType, null, callback
+      );
+    }
+
+    /**
+     * Callback function to receive the result of the teamsReferAthleteToMedicalstaffPost operation.
+     * @callback module:api/TeamsApi~teamsReferAthleteToMedicalstaffPostCallback
+     * @param {String} error Error message, if any.
+     * @param data This operation does not return a value.
+     * @param {String} response The complete HTTP response.
+     */
+
+    /**
+     * Направление спортсмена к медицинскому персоналу
+     * @param {module:models/ReferAthletesToMedicalstaffRequest} referAthletesToMedicalstaffRequest 
+     * @param {module:api/TeamsApi~teamsReferAthleteToMedicalstaffPostCallback} callback The callback function, accepting three arguments: error, data, response
+     */
+    teamsReferAthleteToMedicalstaffPost(referAthletesToMedicalstaffRequest, callback) {
+      let postBody = referAthletesToMedicalstaffRequest;
+      // verify the required parameter 'referAthletesToMedicalstaffRequest' is set
+      if (referAthletesToMedicalstaffRequest === undefined || referAthletesToMedicalstaffRequest === null) {
+        throw new Error("Missing the required parameter 'referAthletesToMedicalstaffRequest' when calling teamsReferAthleteToMedicalstaffPost");
+      }
+
+      let pathParams = {
+      };
+      let queryParams = {
+      };
+      let headerParams = {
+      };
+      let formParams = {
+      };
+
+      let authNames = ['bearerAuth'];
+      let contentTypes = ['application/json'];
+      let accepts = ['application/json'];
+      let returnType = null;
+      return this.apiClient.callApi(
+        '/teams/refer-athlete-to-medicalstaff', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
         authNames, contentTypes, accepts, returnType, null, callback
       );

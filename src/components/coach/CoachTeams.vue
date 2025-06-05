@@ -100,7 +100,7 @@
       </div>
     </div>
 
-    <!-- Модальное окно создания команды (оставляю современным, как было до этого) -->
+    <!-- Модальное окно создания команды -->
     <div v-if="showCreateTeamModal" class="fixed inset-0 z-10 overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true">
       <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
         <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true" @click="showCreateTeamModal = false"></div>
@@ -222,7 +222,6 @@
         <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true" @click="selectedTeam = null"></div>
         <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
         <div class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-2xl w-full">
-          <!-- Шапка -->
           <div class="bg-gradient-to-r from-primary-50 to-primary-100 px-6 py-4 border-b border-gray-200 flex items-center justify-between">
             <div class="flex items-center">
               <svg class="h-6 w-6 mr-2 text-primary-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -448,7 +447,6 @@ const teams = ref([])
 const loading = ref(false)
 const error = ref(null)
 
-// Загрузка списка команд
 const loadTeams = async () => {
   loading.value = true
   error.value = null
@@ -504,10 +502,8 @@ const createTeam = async () => {
       })
     })
     
-    // Перезагружаем список команд
     await loadTeams()
     
-    // Очищаем форму и закрываем модальное окно
     newTeam.value = { name: '', sport_type_id: '' }
     showCreateTeamModal.value = false
   } catch (err) {
@@ -527,14 +523,12 @@ const viewTeam = async (team) => {
   try {
     const req = new TeamRequest()
     req.team_id = team.team_id
-    // Загрузка спортсменов
     const { data: athletesData } = await new Promise((resolve, reject) => {
       teamsApi.teamsAthletesPost(req, (error, data, response) => {
         if (error) reject(error)
         else resolve({ data, response })
       })
     })
-    // Загрузка тренеров
     const { data: coachesData } = await new Promise((resolve, reject) => {
       teamsApi.teamsCoachesPost(req, (error, data, response) => {
         if (error) reject(error)
@@ -602,7 +596,6 @@ const removeAthlete = async (athlete) => {
         else resolve({ data, response })
       })
     })
-    // После удаления — обновляю
     await viewTeam(selectedTeam.value)
   } catch (err) {
     alert('Ошибка при удалении спортсмена')
@@ -691,7 +684,6 @@ const calculateAge = (birthDate) => {
 }
 
 const viewAthleteProfile = (athlete) => {
-  // Преобразуем full_name в отдельные поля для отображения
   const nameParts = athlete.full_name.split(' ')
   selectedAthlete.value = {
     ...athlete,
@@ -704,13 +696,11 @@ const viewAthleteProfile = (athlete) => {
 }
 
 const addSecondCoach = () => {
-  // Реализовать добавление второго тренера через API/модалку выбора
   if (!selectedTeam.value.coaches) selectedTeam.value.coaches = []
   selectedTeam.value.coaches.push({ id: 99, full_name: 'Новый тренер', email: 'newcoach@mail.ru', role: 'assistant' })
 }
 
 const removeCoach = (coach) => {
-  // Реализовать удаление второго тренера через API
   selectedTeam.value.coaches = selectedTeam.value.coaches.filter(c => c.id !== coach.id)
 }
 

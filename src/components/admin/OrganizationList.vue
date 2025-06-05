@@ -142,8 +142,6 @@ const loadOrganizations = async () => {
   error.value = null
 
   try {
-    // TODO: Добавить API для загрузки списка организаций
-    // Временные данные для демонстрации
     organizations.value = [
       {
         id: 1,
@@ -185,7 +183,6 @@ const deleteOrganization = async (org) => {
   error.value = null
 
   try {
-    // TODO: Добавить API для удаления организации
     console.log('Удаление организации:', org)
     await loadOrganizations() // Перезагружаем список после удаления
   } catch (err) {

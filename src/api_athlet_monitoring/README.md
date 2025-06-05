@@ -139,16 +139,21 @@ Class | Method | HTTP request | Description
 *Api.BiometricsApi* | [**biometricsPost**](docs/BiometricsApi.md#biometricsPost) | **POST** /biometrics | Ввод биометрических данных спортсменом
 *Api.TeamsApi* | [**teamAthleteRemovePost**](docs/TeamsApi.md#teamAthleteRemovePost) | **POST** /team/athlete-remove | Удаление спортсмена из команды
 *Api.TeamsApi* | [**teamAthleteTeamStatusGet**](docs/TeamsApi.md#teamAthleteTeamStatusGet) | **GET** /team/athlete-team-status | Заявка на вступление в команду
+*Api.TeamsApi* | [**teamGetCriticalAthletesGet**](docs/TeamsApi.md#teamGetCriticalAthletesGet) | **GET** /team/get-critical-athletes | Список критических спортсменов
 *Api.TeamsApi* | [**teamsAllAthletesGet**](docs/TeamsApi.md#teamsAllAthletesGet) | **GET** /teams/all-athletes | Список всех спортсменов
 *Api.TeamsApi* | [**teamsAthletesPost**](docs/TeamsApi.md#teamsAthletesPost) | **POST** /teams/athletes | Список спортсменов в команде
 *Api.TeamsApi* | [**teamsCoachesPost**](docs/TeamsApi.md#teamsCoachesPost) | **POST** /teams/coaches | Список тренеров в команде
 *Api.TeamsApi* | [**teamsCreatePost**](docs/TeamsApi.md#teamsCreatePost) | **POST** /teams/create | Создание команды
 *Api.TeamsApi* | [**teamsGet**](docs/TeamsApi.md#teamsGet) | **GET** /teams | Список команд
+*Api.TeamsApi* | [**teamsGetCriticalAthletePost**](docs/TeamsApi.md#teamsGetCriticalAthletePost) | **POST** /teams/get-critical-athlete | Список критических спортсменов в команде
+*Api.TeamsApi* | [**teamsGetMedicalAssigmentsGet**](docs/TeamsApi.md#teamsGetMedicalAssigmentsGet) | **GET** /teams/get-medical-assigments | Список медицинских назначений
 *Api.TeamsApi* | [**teamsJoinPost**](docs/TeamsApi.md#teamsJoinPost) | **POST** /teams/join | Запрос спортсмена на вступление в команду
 *Api.TeamsApi* | [**teamsJoinRequestIdApprovePost**](docs/TeamsApi.md#teamsJoinRequestIdApprovePost) | **POST** /teams/join/{request_id}/approve | Одобрение заявки на вступление в команду
 *Api.TeamsApi* | [**teamsJoinRequestIdRejectPost**](docs/TeamsApi.md#teamsJoinRequestIdRejectPost) | **POST** /teams/join/{request_id}/reject | Отклонение заявки на вступление в команду
 *Api.TeamsApi* | [**teamsJoinsListGet**](docs/TeamsApi.md#teamsJoinsListGet) | **GET** /teams/joins-list | Список заявок на вступление в команды
 *Api.TeamsApi* | [**teamsJoinsListTeamIdGet**](docs/TeamsApi.md#teamsJoinsListTeamIdGet) | **GET** /teams/joins-list/{team_id} | Список заявок на вступление в команду
+*Api.TeamsApi* | [**teamsMedicalstaffGet**](docs/TeamsApi.md#teamsMedicalstaffGet) | **GET** /teams/medicalstaff | Список медицинского персонала в команде
+*Api.TeamsApi* | [**teamsReferAthleteToMedicalstaffPost**](docs/TeamsApi.md#teamsReferAthleteToMedicalstaffPost) | **POST** /teams/refer-athlete-to-medicalstaff | Направление спортсмена к медицинскому персоналу
 *Api.TrainingApi* | [**getTrainingPlansPost**](docs/TrainingApi.md#getTrainingPlansPost) | **POST** /get-training-plans | Список тренировочных планов
 *Api.TrainingApi* | [**trainingPlansItemsItemIdDelete**](docs/TrainingApi.md#trainingPlansItemsItemIdDelete) | **DELETE** /training-plans/items/{item_id} | Удаление пункта плана
 *Api.TrainingApi* | [**trainingPlansItemsItemIdOverridePost**](docs/TrainingApi.md#trainingPlansItemsItemIdOverridePost) | **POST** /training-plans/items/{item_id}/override | Изменение пункта плана для конкретного спортсмена
@@ -160,6 +165,7 @@ Class | Method | HTTP request | Description
 ## Documentation for Models
 
  - [Api.AllAthletesResponse](docs/AllAthletesResponse.md)
+ - [Api.AthleteIndicatorResponse](docs/AthleteIndicatorResponse.md)
  - [Api.AthleteProfileRequest](docs/AthleteProfileRequest.md)
  - [Api.AthleteProfileResponse](docs/AthleteProfileResponse.md)
  - [Api.AthleteRegisterRequest](docs/AthleteRegisterRequest.md)
@@ -167,7 +173,12 @@ Class | Method | HTTP request | Description
  - [Api.AuthChangePasswordPostRequest](docs/AuthChangePasswordPostRequest.md)
  - [Api.BiometricInput](docs/BiometricInput.md)
  - [Api.CoachProfileResponse](docs/CoachProfileResponse.md)
+ - [Api.CriticalAthleteProfileResponse](docs/CriticalAthleteProfileResponse.md)
+ - [Api.CriticalAthleteRequest](docs/CriticalAthleteRequest.md)
+ - [Api.CriticalAthleteResponse](docs/CriticalAthleteResponse.md)
+ - [Api.CriticalAthletesResponse](docs/CriticalAthletesResponse.md)
  - [Api.ErrorResponse](docs/ErrorResponse.md)
+ - [Api.IndicatorLimit](docs/IndicatorLimit.md)
  - [Api.InviteAllResponse](docs/InviteAllResponse.md)
  - [Api.InviteCancelRequest](docs/InviteCancelRequest.md)
  - [Api.InviteCreateRequest](docs/InviteCreateRequest.md)
@@ -177,11 +188,17 @@ Class | Method | HTTP request | Description
  - [Api.InviteRegisterRequest](docs/InviteRegisterRequest.md)
  - [Api.LoginRequest](docs/LoginRequest.md)
  - [Api.LoginResponse](docs/LoginResponse.md)
+ - [Api.MedicalAssigment](docs/MedicalAssigment.md)
+ - [Api.MedicalstaffProfileResponse](docs/MedicalstaffProfileResponse.md)
+ - [Api.ReferAthlete](docs/ReferAthlete.md)
+ - [Api.ReferAthletesToMedicalstaffRequest](docs/ReferAthletesToMedicalstaffRequest.md)
  - [Api.Team](docs/Team.md)
  - [Api.TeamAthleteStatusResponse](docs/TeamAthleteStatusResponse.md)
  - [Api.TeamCreateRequest](docs/TeamCreateRequest.md)
  - [Api.TeamGetAthletesResponse](docs/TeamGetAthletesResponse.md)
  - [Api.TeamGetCoachesResponse](docs/TeamGetCoachesResponse.md)
+ - [Api.TeamGetMedicalAssignmentsResponse](docs/TeamGetMedicalAssignmentsResponse.md)
+ - [Api.TeamGetMedicalstaffResponse](docs/TeamGetMedicalstaffResponse.md)
  - [Api.TeamJoin](docs/TeamJoin.md)
  - [Api.TeamJoinRequest](docs/TeamJoinRequest.md)
  - [Api.TeamJoinsListResponse](docs/TeamJoinsListResponse.md)

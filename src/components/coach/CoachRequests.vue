@@ -237,7 +237,6 @@
 import { ref, computed, onMounted } from 'vue'
 import { ApiClient, TeamsApi } from '../../api_athlet_monitoring/src'
 
-// Создаем экземпляр API клиента
 const apiClient = new ApiClient()
 apiClient.basePath = 'http://localhost:8000/api/v1'
 apiClient.enableCookies = true
@@ -256,7 +255,6 @@ const selectedRequest = ref(null)
 const confirmAction = ref('')
 const selectedAthlete = ref(null)
 
-// Загрузка списка команд
 const loadTeams = async () => {
   try {
     const { data } = await new Promise((resolve, reject) => {
@@ -374,7 +372,6 @@ const confirmRequestAction = async () => {
       })
     }
     
-    // Обновляем статус заявки в локальном состоянии
     const requestIndex = requests.value.findIndex(r => r.id === selectedRequest.value.id)
     if (requestIndex !== -1) {
       requests.value[requestIndex].status = confirmAction.value === 'approve' ? 'approved' : 'rejected'

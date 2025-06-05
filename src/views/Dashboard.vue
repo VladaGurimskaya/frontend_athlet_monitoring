@@ -9,16 +9,6 @@
             </div>
             <div class="hidden sm:ml-6 sm:flex sm:space-x-8">
               <!-- Общие вкладки для всех пользователей -->
-              <a
-                href="#" 
-                @click.prevent="activeTab = 'dashboard'"
-                :class="[
-                  activeTab === 'dashboard' ? 'border-primary-500 text-gray-900' : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700', 
-                  'inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium'
-                ]"
-              >
-                Главная
-              </a>
               <!-- Вкладки только для администратора -->
               <a 
                 v-if="authStore.isAdmin" 
@@ -98,17 +88,28 @@
               >
                 Аналитика
               </a>
+              <a 
+                v-if="authStore.isCoach" 
+                href="#" 
+                @click.prevent="activeTab = 'hr-calculator'"
+                :class="[
+                  activeTab === 'hr-calculator' ? 'border-primary-500 text-gray-900' : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700', 
+                  'inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium'
+                ]"
+              >
+                Калькулятор ЧСС
+              </a>
               <!-- Вкладки для медицинского персонала -->
               <a
                   v-if="authStore.isMedical"
                   href="#"
-                  @click.prevent="activeTab = 'medical-athletes'"
+                  @click.prevent="activeTab = 'medical-notes'"
                   :class="[
-                    activeTab === 'medical-athletes' ? 'border-primary-500 text-gray-900' : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700',
-                    'inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium'
-                  ]"
+                  activeTab === 'medical-notes' ? 'border-primary-500 text-gray-900' : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700',
+                  'inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium'
+                ]"
               >
-                Спортсмены
+                Медицинские записи
               </a>
               <!-- Вкладки для спортсмена -->
               <a 
@@ -132,6 +133,17 @@
                 ]"
               >
                 Профиль
+              </a>
+              <a
+                v-if="authStore.isAthlete"
+                href="#"
+                @click.prevent="activeTab = 'athlete-training-plans'"
+                :class="[
+                  activeTab === 'athlete-training-plans' ? 'border-primary-500 text-gray-900' : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700',
+                  'inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium'
+                ]"
+              >
+                Тренировочные планы
               </a>
             </div>
           </div>
@@ -183,6 +195,9 @@
           <div v-else-if="activeTab === 'analytics' && authStore.isCoach" class="px-4 py-5 sm:px-0">
             <CoachAnalytics />
           </div>
+          <div v-else-if="activeTab === 'hr-calculator' && authStore.isCoach" class="px-4 py-5 sm:px-0">
+            <CoachHRCalculator />
+          </div>
           <!-- Вкладки для спортсмена -->
           <div v-else-if="activeTab === 'biometrics' && authStore.isAthlete" class="px-4 py-5 sm:px-0">
             <AthleteBiometrics />
@@ -190,13 +205,16 @@
           <div v-else-if="activeTab === 'profile' && authStore.isAthlete" class="px-4 py-5 sm:px-0">
             <AthleteProfile />
           </div>
-          <!-- Вкладка для врача -->
-          <div v-else-if="activeTab === 'medical-athletes' && authStore.isMedical" class="px-4 py-5 sm:px-0">
+          <div v-else-if="activeTab === 'athlete-training-plans' && authStore.isAthlete" class="px-4 py-5 sm:px-0">
+            <AthleteTrainingPlans />
+          </div>
+
+          <div v-else-if="activeTab === 'medical-notes' && authStore.isMedical" class="px-4 py-5 sm:px-0">
             <MedicalAthletes />
           </div>
           <div v-else class="px-4 py-8 sm:px-0">
             <div class="border-4 border-dashed border-gray-200 rounded-lg h-96 flex items-center justify-center">
-              <p class="text-gray-500">Здесь будет {{ contentPlaceholder }}</p>
+              <p class="text-gray-500">Выберите вкладку в меню сверху</p>
             </div>
           </div>
         </div>
@@ -219,10 +237,19 @@ import AthleteProfile from '../components/athlete/AthleteProfile.vue'
 import OrganizationList from '../components/admin/OrganizationList.vue'
 import CoachAnalytics from '../components/coach/CoachAnalytics.vue'
 import MedicalAthletes from "@/components/medicalstaff/MedicalAthletes.vue";
+import AthleteTrainingPlans from '../components/athlete/AthleteTrainingPlans.vue'
+import CoachHRCalculator from '../components/coach/CoachHRCalculator.vue'
 
 const router = useRouter()
 const authStore = useAuthStore()
-const activeTab = ref('dashboard')
+
+// По умолчанию открываем первую доступную вкладку по роли
+let defaultTab = ''
+if (authStore.isAdmin) defaultTab = 'invite'
+else if (authStore.isCoach) defaultTab = 'teams'
+else if (authStore.isMedical) defaultTab = 'medical-notes'
+else if (authStore.isAthlete) defaultTab = 'biometrics'
+const activeTab = ref(defaultTab)
 
 const userRoleText = computed(() => {
   switch (authStore.role) {
@@ -249,10 +276,14 @@ const pageTitle = computed(() => {
     return 'Заявки спортсменов'
   } else if (activeTab.value === 'analytics') {
     return 'Аналитика'
+  } else if (activeTab.value === 'hr-calculator') {
+    return 'Калькулятор ЧСС'
   } else if (activeTab.value === 'biometrics') {
     return 'Биометрические данные'
   } else if (activeTab.value === 'profile') {
     return 'Профиль спортсмена'
+  } else if (activeTab.value === 'athlete-training-plans') {
+    return 'Тренировочные планы'
   }
   return 'Панель управления'
 })
@@ -274,11 +305,4 @@ const logout = () => {
   authStore.logout()
   router.push('/login')
 }
-
-const analyticsTabs = [
-  { value: 'critical', label: 'Критические показатели' },
-  { value: 'warning', label: 'Тревожные показатели' },
-  { value: 'teams', label: 'Мои команды' }
-]
-const analyticsActiveTab = ref('critical')
 </script> 

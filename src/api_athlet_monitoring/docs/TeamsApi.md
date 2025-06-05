@@ -6,16 +6,21 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**teamAthleteRemovePost**](TeamsApi.md#teamAthleteRemovePost) | **POST** /team/athlete-remove | Удаление спортсмена из команды
 [**teamAthleteTeamStatusGet**](TeamsApi.md#teamAthleteTeamStatusGet) | **GET** /team/athlete-team-status | Заявка на вступление в команду
+[**teamGetCriticalAthletesGet**](TeamsApi.md#teamGetCriticalAthletesGet) | **GET** /team/get-critical-athletes | Список критических спортсменов
 [**teamsAllAthletesGet**](TeamsApi.md#teamsAllAthletesGet) | **GET** /teams/all-athletes | Список всех спортсменов
 [**teamsAthletesPost**](TeamsApi.md#teamsAthletesPost) | **POST** /teams/athletes | Список спортсменов в команде
 [**teamsCoachesPost**](TeamsApi.md#teamsCoachesPost) | **POST** /teams/coaches | Список тренеров в команде
 [**teamsCreatePost**](TeamsApi.md#teamsCreatePost) | **POST** /teams/create | Создание команды
 [**teamsGet**](TeamsApi.md#teamsGet) | **GET** /teams | Список команд
+[**teamsGetCriticalAthletePost**](TeamsApi.md#teamsGetCriticalAthletePost) | **POST** /teams/get-critical-athlete | Список критических спортсменов в команде
+[**teamsGetMedicalAssigmentsGet**](TeamsApi.md#teamsGetMedicalAssigmentsGet) | **GET** /teams/get-medical-assigments | Список медицинских назначений
 [**teamsJoinPost**](TeamsApi.md#teamsJoinPost) | **POST** /teams/join | Запрос спортсмена на вступление в команду
 [**teamsJoinRequestIdApprovePost**](TeamsApi.md#teamsJoinRequestIdApprovePost) | **POST** /teams/join/{request_id}/approve | Одобрение заявки на вступление в команду
 [**teamsJoinRequestIdRejectPost**](TeamsApi.md#teamsJoinRequestIdRejectPost) | **POST** /teams/join/{request_id}/reject | Отклонение заявки на вступление в команду
 [**teamsJoinsListGet**](TeamsApi.md#teamsJoinsListGet) | **GET** /teams/joins-list | Список заявок на вступление в команды
 [**teamsJoinsListTeamIdGet**](TeamsApi.md#teamsJoinsListTeamIdGet) | **GET** /teams/joins-list/{team_id} | Список заявок на вступление в команду
+[**teamsMedicalstaffGet**](TeamsApi.md#teamsMedicalstaffGet) | **GET** /teams/medicalstaff | Список медицинского персонала в команде
+[**teamsReferAthleteToMedicalstaffPost**](TeamsApi.md#teamsReferAthleteToMedicalstaffPost) | **POST** /teams/refer-athlete-to-medicalstaff | Направление спортсмена к медицинскому персоналу
 
 
 
@@ -98,6 +103,49 @@ This endpoint does not need any parameter.
 ### Return type
 
 [**TeamAthleteStatusResponse**](TeamAthleteStatusResponse.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## teamGetCriticalAthletesGet
+
+> CriticalAthletesResponse teamGetCriticalAthletesGet()
+
+Список критических спортсменов
+
+### Example
+
+```javascript
+import Api from '____api';
+let defaultClient = Api.ApiClient.instance;
+// Configure Bearer (JWT) access token for authorization: bearerAuth
+let bearerAuth = defaultClient.authentications['bearerAuth'];
+bearerAuth.accessToken = "YOUR ACCESS TOKEN"
+
+let apiInstance = new Api.TeamsApi();
+apiInstance.teamGetCriticalAthletesGet((error, data, response) => {
+  if (error) {
+    console.error(error);
+  } else {
+    console.log('API called successfully. Returned data: ' + data);
+  }
+});
+```
+
+### Parameters
+
+This endpoint does not need any parameter.
+
+### Return type
+
+[**CriticalAthletesResponse**](CriticalAthletesResponse.md)
 
 ### Authorization
 
@@ -325,6 +373,96 @@ This endpoint does not need any parameter.
 ### Return type
 
 [**TeamResponse**](TeamResponse.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## teamsGetCriticalAthletePost
+
+> CriticalAthleteResponse teamsGetCriticalAthletePost(criticalAthleteRequest)
+
+Список критических спортсменов в команде
+
+### Example
+
+```javascript
+import Api from '____api';
+let defaultClient = Api.ApiClient.instance;
+// Configure Bearer (JWT) access token for authorization: bearerAuth
+let bearerAuth = defaultClient.authentications['bearerAuth'];
+bearerAuth.accessToken = "YOUR ACCESS TOKEN"
+
+let apiInstance = new Api.TeamsApi();
+let criticalAthleteRequest = new Api.CriticalAthleteRequest(); // CriticalAthleteRequest | 
+apiInstance.teamsGetCriticalAthletePost(criticalAthleteRequest, (error, data, response) => {
+  if (error) {
+    console.error(error);
+  } else {
+    console.log('API called successfully. Returned data: ' + data);
+  }
+});
+```
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **criticalAthleteRequest** | [**CriticalAthleteRequest**](CriticalAthleteRequest.md)|  | 
+
+### Return type
+
+[**CriticalAthleteResponse**](CriticalAthleteResponse.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+
+## teamsGetMedicalAssigmentsGet
+
+> TeamGetMedicalAssignmentsResponse teamsGetMedicalAssigmentsGet()
+
+Список медицинских назначений
+
+### Example
+
+```javascript
+import Api from '____api';
+let defaultClient = Api.ApiClient.instance;
+// Configure Bearer (JWT) access token for authorization: bearerAuth
+let bearerAuth = defaultClient.authentications['bearerAuth'];
+bearerAuth.accessToken = "YOUR ACCESS TOKEN"
+
+let apiInstance = new Api.TeamsApi();
+apiInstance.teamsGetMedicalAssigmentsGet((error, data, response) => {
+  if (error) {
+    console.error(error);
+  } else {
+    console.log('API called successfully. Returned data: ' + data);
+  }
+});
+```
+
+### Parameters
+
+This endpoint does not need any parameter.
+
+### Return type
+
+[**TeamGetMedicalAssignmentsResponse**](TeamGetMedicalAssignmentsResponse.md)
 
 ### Authorization
 
@@ -564,5 +702,95 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## teamsMedicalstaffGet
+
+> TeamGetMedicalstaffResponse teamsMedicalstaffGet()
+
+Список медицинского персонала в команде
+
+### Example
+
+```javascript
+import Api from '____api';
+let defaultClient = Api.ApiClient.instance;
+// Configure Bearer (JWT) access token for authorization: bearerAuth
+let bearerAuth = defaultClient.authentications['bearerAuth'];
+bearerAuth.accessToken = "YOUR ACCESS TOKEN"
+
+let apiInstance = new Api.TeamsApi();
+apiInstance.teamsMedicalstaffGet((error, data, response) => {
+  if (error) {
+    console.error(error);
+  } else {
+    console.log('API called successfully. Returned data: ' + data);
+  }
+});
+```
+
+### Parameters
+
+This endpoint does not need any parameter.
+
+### Return type
+
+[**TeamGetMedicalstaffResponse**](TeamGetMedicalstaffResponse.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## teamsReferAthleteToMedicalstaffPost
+
+> teamsReferAthleteToMedicalstaffPost(referAthletesToMedicalstaffRequest)
+
+Направление спортсмена к медицинскому персоналу
+
+### Example
+
+```javascript
+import Api from '____api';
+let defaultClient = Api.ApiClient.instance;
+// Configure Bearer (JWT) access token for authorization: bearerAuth
+let bearerAuth = defaultClient.authentications['bearerAuth'];
+bearerAuth.accessToken = "YOUR ACCESS TOKEN"
+
+let apiInstance = new Api.TeamsApi();
+let referAthletesToMedicalstaffRequest = new Api.ReferAthletesToMedicalstaffRequest(); // ReferAthletesToMedicalstaffRequest | 
+apiInstance.teamsReferAthleteToMedicalstaffPost(referAthletesToMedicalstaffRequest, (error, data, response) => {
+  if (error) {
+    console.error(error);
+  } else {
+    console.log('API called successfully.');
+  }
+});
+```
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **referAthletesToMedicalstaffRequest** | [**ReferAthletesToMedicalstaffRequest**](ReferAthletesToMedicalstaffRequest.md)|  | 
+
+### Return type
+
+null (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
 - **Accept**: application/json
 

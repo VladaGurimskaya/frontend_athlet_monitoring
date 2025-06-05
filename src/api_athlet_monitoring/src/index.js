@@ -14,6 +14,7 @@
 
 import ApiClient from './ApiClient';
 import AllAthletesResponse from './models/AllAthletesResponse';
+import AthleteIndicatorResponse from './models/AthleteIndicatorResponse';
 import AthleteProfileRequest from './models/AthleteProfileRequest';
 import AthleteProfileResponse from './models/AthleteProfileResponse';
 import AthleteRegisterRequest from './models/AthleteRegisterRequest';
@@ -21,7 +22,12 @@ import AthleteTeamResponse from './models/AthleteTeamResponse';
 import AuthChangePasswordPostRequest from './models/AuthChangePasswordPostRequest';
 import BiometricInput from './models/BiometricInput';
 import CoachProfileResponse from './models/CoachProfileResponse';
+import CriticalAthleteProfileResponse from './models/CriticalAthleteProfileResponse';
+import CriticalAthleteRequest from './models/CriticalAthleteRequest';
+import CriticalAthleteResponse from './models/CriticalAthleteResponse';
+import CriticalAthletesResponse from './models/CriticalAthletesResponse';
 import ErrorResponse from './models/ErrorResponse';
+import IndicatorLimit from './models/IndicatorLimit';
 import InviteAllResponse from './models/InviteAllResponse';
 import InviteCancelRequest from './models/InviteCancelRequest';
 import InviteCreateRequest from './models/InviteCreateRequest';
@@ -31,11 +37,17 @@ import InviteDetailsResponse from './models/InviteDetailsResponse';
 import InviteRegisterRequest from './models/InviteRegisterRequest';
 import LoginRequest from './models/LoginRequest';
 import LoginResponse from './models/LoginResponse';
+import MedicalAssigment from './models/MedicalAssigment';
+import MedicalstaffProfileResponse from './models/MedicalstaffProfileResponse';
+import ReferAthlete from './models/ReferAthlete';
+import ReferAthletesToMedicalstaffRequest from './models/ReferAthletesToMedicalstaffRequest';
 import Team from './models/Team';
 import TeamAthleteStatusResponse from './models/TeamAthleteStatusResponse';
 import TeamCreateRequest from './models/TeamCreateRequest';
 import TeamGetAthletesResponse from './models/TeamGetAthletesResponse';
 import TeamGetCoachesResponse from './models/TeamGetCoachesResponse';
+import TeamGetMedicalAssignmentsResponse from './models/TeamGetMedicalAssignmentsResponse';
+import TeamGetMedicalstaffResponse from './models/TeamGetMedicalstaffResponse';
 import TeamJoin from './models/TeamJoin';
 import TeamJoinRequest from './models/TeamJoinRequest';
 import TeamJoinsListResponse from './models/TeamJoinsListResponse';
@@ -98,6 +110,12 @@ export {
     AllAthletesResponse,
 
     /**
+     * The AthleteIndicatorResponse model constructor.
+     * @property {module:models/AthleteIndicatorResponse}
+     */
+    AthleteIndicatorResponse,
+
+    /**
      * The AthleteProfileRequest model constructor.
      * @property {module:models/AthleteProfileRequest}
      */
@@ -140,10 +158,40 @@ export {
     CoachProfileResponse,
 
     /**
+     * The CriticalAthleteProfileResponse model constructor.
+     * @property {module:models/CriticalAthleteProfileResponse}
+     */
+    CriticalAthleteProfileResponse,
+
+    /**
+     * The CriticalAthleteRequest model constructor.
+     * @property {module:models/CriticalAthleteRequest}
+     */
+    CriticalAthleteRequest,
+
+    /**
+     * The CriticalAthleteResponse model constructor.
+     * @property {module:models/CriticalAthleteResponse}
+     */
+    CriticalAthleteResponse,
+
+    /**
+     * The CriticalAthletesResponse model constructor.
+     * @property {module:models/CriticalAthletesResponse}
+     */
+    CriticalAthletesResponse,
+
+    /**
      * The ErrorResponse model constructor.
      * @property {module:models/ErrorResponse}
      */
     ErrorResponse,
+
+    /**
+     * The IndicatorLimit model constructor.
+     * @property {module:models/IndicatorLimit}
+     */
+    IndicatorLimit,
 
     /**
      * The InviteAllResponse model constructor.
@@ -200,6 +248,30 @@ export {
     LoginResponse,
 
     /**
+     * The MedicalAssigment model constructor.
+     * @property {module:models/MedicalAssigment}
+     */
+    MedicalAssigment,
+
+    /**
+     * The MedicalstaffProfileResponse model constructor.
+     * @property {module:models/MedicalstaffProfileResponse}
+     */
+    MedicalstaffProfileResponse,
+
+    /**
+     * The ReferAthlete model constructor.
+     * @property {module:models/ReferAthlete}
+     */
+    ReferAthlete,
+
+    /**
+     * The ReferAthletesToMedicalstaffRequest model constructor.
+     * @property {module:models/ReferAthletesToMedicalstaffRequest}
+     */
+    ReferAthletesToMedicalstaffRequest,
+
+    /**
      * The Team model constructor.
      * @property {module:models/Team}
      */
@@ -228,6 +300,18 @@ export {
      * @property {module:models/TeamGetCoachesResponse}
      */
     TeamGetCoachesResponse,
+
+    /**
+     * The TeamGetMedicalAssignmentsResponse model constructor.
+     * @property {module:models/TeamGetMedicalAssignmentsResponse}
+     */
+    TeamGetMedicalAssignmentsResponse,
+
+    /**
+     * The TeamGetMedicalstaffResponse model constructor.
+     * @property {module:models/TeamGetMedicalstaffResponse}
+     */
+    TeamGetMedicalstaffResponse,
 
     /**
      * The TeamJoin model constructor.

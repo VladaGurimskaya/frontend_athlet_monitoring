@@ -224,10 +224,6 @@ const handleSubmit = async () => {
   successMessage.value = null
 
   try {
-    // TODO: Добавить API для создания/редактирования организации
-    console.log('Отправка данных организации:', formData.value)
-    
-    // Имитация задержки API
     await new Promise(resolve => setTimeout(resolve, 1000))
     
     successMessage.value = isEditing.value 
